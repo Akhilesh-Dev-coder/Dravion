@@ -271,15 +271,31 @@ export default function EditCardClient({ cardId }: { cardId: string }) {
     });
   };
 
-  const moveBlock = (index: number, direction: "up" | "down") => {
+  const moveBlock = (blockId: string, direction: "up" | "down") => {
     if (!card || !card.blocks) return;
-    const newBlocks = [...card.blocks];
-    const targetIndex = direction === "up" ? index - 1 : index + 1;
-    if (targetIndex < 0 || targetIndex >= newBlocks.length) return;
     
-    const temp = newBlocks[index];
-    newBlocks[index] = newBlocks[targetIndex];
-    newBlocks[targetIndex] = temp;
+    const visibleBlocks = card.blocks.filter((b) => b !== "portfolio");
+    const index = visibleBlocks.indexOf(blockId);
+    if (index === -1) return;
+    
+    const targetIndex = direction === "up" ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= visibleBlocks.length) return;
+    
+    const newVisible = [...visibleBlocks];
+    const temp = newVisible[index];
+    newVisible[index] = newVisible[targetIndex];
+    newVisible[targetIndex] = temp;
+    
+    const newBlocks: string[] = [];
+    let visiblePtr = 0;
+    
+    card.blocks.forEach((b) => {
+      if (b === "portfolio") {
+        newBlocks.push("portfolio");
+      } else {
+        newBlocks.push(newVisible[visiblePtr++]);
+      }
+    });
     
     setCard({
       ...card,
@@ -831,6 +847,8 @@ export default function EditCardClient({ cardId }: { cardId: string }) {
                       qrcode: "6. Sharing QR Scan Box"
                     };
 
+                    const visibleCount = (card.blocks || []).filter(b => b !== "portfolio").length;
+
                     return (
                       <div 
                         key={blockId} 
@@ -844,15 +862,15 @@ export default function EditCardClient({ cardId }: { cardId: string }) {
                           <button
                             type="button"
                             disabled={idx === 0}
-                            onClick={() => moveBlock(idx, "up")}
+                            onClick={() => moveBlock(blockId, "up")}
                             className="p-1.5 bg-white/5 border border-white/10 rounded hover:bg-white/10 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
                           >
                             <ArrowUp className="w-3.5 h-3.5" />
                           </button>
                           <button
                             type="button"
-                            disabled={idx === (card.blocks || []).length - 1}
-                            onClick={() => moveBlock(idx, "down")}
+                            disabled={idx === visibleCount - 1}
+                            onClick={() => moveBlock(blockId, "down")}
                             className="p-1.5 bg-white/5 border border-white/10 rounded hover:bg-white/10 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
                           >
                             <ArrowDown className="w-3.5 h-3.5" />
