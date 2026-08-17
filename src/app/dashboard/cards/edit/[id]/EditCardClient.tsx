@@ -601,18 +601,18 @@ export default function EditCardClient({ cardId }: { cardId: string }) {
                 <h3 className="text-sm font-bold text-white mb-4">Connected Networks</h3>
                 <div className="space-y-3">
                   {[
-                    { id: "instagram", label: "Instagram" },
-                    { id: "linkedin", label: "LinkedIn" },
-                    { id: "github", label: "GitHub" },
-                    { id: "facebook", label: "Facebook" },
-                    { id: "twitter", label: "Twitter / X" },
-                    { id: "youtube", label: "YouTube" }
+                    { id: "instagram", label: "Instagram", placeholder: "https://instagram.com/yourusername" },
+                    { id: "linkedin", label: "LinkedIn", placeholder: "https://linkedin.com/in/yourusername" },
+                    { id: "github", label: "GitHub", placeholder: "https://github.com/yourusername" },
+                    { id: "facebook", label: "Facebook", placeholder: "https://facebook.com/yourusername" },
+                    { id: "twitter", label: "Twitter / X", placeholder: "https://x.com/yourusername" },
+                    { id: "youtube", label: "YouTube", placeholder: "https://youtube.com/@yourusername" }
                   ].map((soc) => (
                     <div key={soc.id} className="space-y-1.5">
                       <label className="text-[10px] font-bold text-gray-400 block">{soc.label}</label>
                       <input
                         type="text"
-                        placeholder="username or full URL"
+                        placeholder={soc.placeholder}
                         value={(card.socialLinks as any)[soc.id] || ""}
                         onChange={(e) => handleNestedChange("socialLinks", soc.id, e.target.value)}
                         className="w-full px-3 py-2.5 rounded-lg text-xs bg-black/40 border border-white/10 text-white focus:outline-none"
