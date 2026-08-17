@@ -104,7 +104,7 @@ export default function ContactPage() {
               </div>
               <div className="flex items-center space-x-3 text-gray-300">
                 <MessageCircle className="w-4 h-4 text-primary shrink-0" />
-                <a href="https://wa.me/919074311597" target="_blank" rel="noopener noreferrer" className="hover:underline">+91 9074311597</a>
+                <a href="https://wa.me/919074311597?text=Hello%20Dravion%2C%20I%20would%20like%20to%20get%20more%20information%20about%20your%20services%21" target="_blank" rel="noopener noreferrer" className="hover:underline">+91 9074311597</a>
               </div>
               <div className="flex items-center space-x-3 text-gray-300">
                 <MessageSquare className="w-4 h-4 text-secondary shrink-0" />
