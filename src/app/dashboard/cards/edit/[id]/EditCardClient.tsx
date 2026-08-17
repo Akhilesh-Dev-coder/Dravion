@@ -393,8 +393,8 @@ export default function EditCardClient({ cardId }: { cardId: string }) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Side forms (7 cols) */}
         <div className="lg:col-span-7 space-y-6">
-          {/* Tab Selection Bar */}
-          <div className="flex overflow-x-auto bg-black/30 border border-white/5 rounded-xl p-1 gap-1 scrollbar-none">
+          {/* Tab Selection Bar - Sticky on Mobile for easy switching */}
+          <div className="sticky top-16 z-30 flex overflow-x-auto bg-[#0b0f19]/90 border border-white/5 rounded-xl p-1.5 gap-1.5 scrollbar-none backdrop-blur-md shadow-lg shadow-black/30">
             {[
               { id: "basic", label: "Basic Info", icon: <User className="w-3.5 h-3.5" /> },
               { id: "contact", label: "Contact", icon: <Phone className="w-3.5 h-3.5" /> },
@@ -406,10 +406,10 @@ export default function EditCardClient({ cardId }: { cardId: string }) {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center space-x-1.5 px-3 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
+                className={`flex items-center space-x-1.5 px-3.5 py-2.5 rounded-lg text-xs font-bold whitespace-nowrap transition-colors cursor-pointer ${
                   activeTab === tab.id
                     ? "bg-primary text-white"
-                    : "text-gray-400 hover:text-white"
+                    : "text-slate-400 hover:text-white hover:bg-white/5"
                 }`}
               >
                 {tab.icon}
@@ -426,8 +426,8 @@ export default function EditCardClient({ cardId }: { cardId: string }) {
                 <h3 className="text-sm font-bold text-white mb-4">Basic Information</h3>
                 
                 {/* Photo Upload layout */}
-                <div className="flex items-center space-x-6 pb-2">
-                  <div className="relative w-20 h-20 rounded-full border border-white/10 overflow-hidden bg-black/40">
+                <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 pb-4 border-b border-white/5">
+                  <div className="relative w-20 h-20 rounded-full border border-white/10 overflow-hidden bg-black/40 shrink-0">
                     <img 
                       src={card.profileImage || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(card.name)}`} 
                       alt="Profile" 
@@ -439,15 +439,16 @@ export default function EditCardClient({ cardId }: { cardId: string }) {
                       </div>
                     )}
                   </div>
-                  <div className="space-y-1.5">
+                  <div className="space-y-1.5 flex-grow text-center sm:text-left w-full">
                     <label className="text-[10px] font-bold text-gray-300 uppercase tracking-wider block">Avatar Portrait</label>
                     <input 
                       type="file" 
                       accept="image/*"
                       onChange={handlePhotoUpload}
                       disabled={uploading}
-                      className="text-xs text-gray-400 file:mr-4 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-[10px] file:font-semibold file:bg-white/5 file:text-white hover:file:bg-white/10 file:cursor-pointer disabled:opacity-50"
+                      className="text-xs text-gray-400 file:mr-4 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-[10px] file:font-semibold file:bg-white/5 file:text-white hover:file:bg-white/10 file:cursor-pointer disabled:opacity-50 w-full"
                     />
+                    <p className="text-[9px] text-gray-500">Supports JPG, PNG or WebP. Square format recommended.</p>
                   </div>
                 </div>
 

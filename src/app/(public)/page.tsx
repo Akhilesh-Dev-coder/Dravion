@@ -34,10 +34,6 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-28 text-center relative z-10">
-        <div className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-xs font-medium text-primary mb-6 animate-pulse">
-          <span>Introducing Dravion SaaS Suite</span>
-          <ArrowRight className="w-3 h-3" />
-        </div>
         <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight leading-none mb-6">
           Building Digital Experiences <br />
           <span className="text-gradient-primary">That Grow Businesses.</span>
@@ -78,6 +74,96 @@ export default function HomePage() {
               <p className="text-sm text-gray-400 leading-relaxed">{srv.desc}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Why Choose Dravion Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-28 md:mt-40 relative z-10">
+        <div className="text-center mb-16">
+          <span className="text-xs font-bold uppercase tracking-wider text-secondary">The Dravion Difference</span>
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mt-2">
+            Why Choose Us.
+          </h2>
+          <p className="text-gray-400 mt-4 text-sm max-w-xl mx-auto">
+            We merge premium web aesthetics with robust, modern software architecture.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="glass-panel p-8 rounded-2xl border border-white/5 space-y-4">
+            <h3 className="text-lg font-bold text-white flex items-center">
+              <span className="w-2 h-2 rounded-full bg-primary mr-2.5"></span> Sub-second Load Times
+            </h3>
+            <p className="text-sm text-gray-400 leading-relaxed">
+              We compile layouts with Next.js Turbopack and pre-render content statically to ensure pages load instantly (under 200ms) on both mobile and desktop.
+            </p>
+          </div>
+
+          <div className="glass-panel p-8 rounded-2xl border border-white/5 space-y-4">
+            <h3 className="text-lg font-bold text-white flex items-center">
+              <span className="w-2 h-2 rounded-full bg-secondary mr-2.5"></span> Premium Visual Design
+            </h3>
+            <p className="text-sm text-gray-400 leading-relaxed">
+              No boring templates. Every interface is styled with premium glassmorphism layouts, responsive elements, and custom CSS color palettes.
+            </p>
+          </div>
+
+          <div className="glass-panel p-8 rounded-2xl border border-white/5 space-y-4">
+            <h3 className="text-lg font-bold text-white flex items-center">
+              <span className="w-2 h-2 rounded-full bg-accent mr-2.5"></span> Live Operational Metrics
+            </h3>
+            <p className="text-sm text-gray-400 leading-relaxed">
+              Every profile link logs views, QR scans, and WhatsApp clicks in real-time, providing immediate engagement data in your dashboard.
+            </p>
+          </div>
+
+          <div className="glass-panel p-8 rounded-2xl border border-white/5 space-y-4">
+            <h3 className="text-lg font-bold text-white flex items-center">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 mr-2.5"></span> Robust Data Security
+            </h3>
+            <p className="text-sm text-gray-400 leading-relaxed">
+              Sessions are guarded with encrypted JWT signatures, passwords are securely hashed, and all API calls prevent payload injection.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Setup Steps Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-28 md:mt-40 relative z-10">
+        <div className="text-center mb-16">
+          <span className="text-xs font-bold uppercase tracking-wider text-accent">Simple Setup</span>
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mt-2">
+            Get Started in 3 Steps.
+          </h2>
+          <p className="text-gray-400 mt-4 text-sm max-w-xl mx-auto">
+            You don't need any technical skills to launch your digital card.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="glass-panel p-8 rounded-2xl border border-white/5 space-y-4 text-center">
+            <div className="w-10 h-10 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-primary text-sm font-bold mx-auto">1</div>
+            <h3 className="text-lg font-semibold text-white">Create Account</h3>
+            <p className="text-xs text-gray-400 leading-relaxed">
+              Sign up securely using your Google account or email in under 15 seconds.
+            </p>
+          </div>
+
+          <div className="glass-panel p-8 rounded-2xl border border-white/5 space-y-4 text-center">
+            <div className="w-10 h-10 rounded-full bg-secondary/20 border border-secondary/30 flex items-center justify-center text-secondary text-sm font-bold mx-auto">2</div>
+            <h3 className="text-lg font-semibold text-white">Input Details</h3>
+            <p className="text-xs text-gray-400 leading-relaxed">
+              Fill in your contact links, whatsapp number, socials, and upload a profile picture.
+            </p>
+          </div>
+
+          <div className="glass-panel p-8 rounded-2xl border border-white/5 space-y-4 text-center">
+            <div className="w-10 h-10 rounded-full bg-accent/20 border border-accent/30 flex items-center justify-center text-accent text-sm font-bold mx-auto">3</div>
+            <h3 className="text-lg font-semibold text-white">Share & Track</h3>
+            <p className="text-xs text-gray-400 leading-relaxed">
+              Instantly share your dynamic QR code or link, and watch your visitor analytics grow.
+            </p>
+          </div>
         </div>
       </section>
 
