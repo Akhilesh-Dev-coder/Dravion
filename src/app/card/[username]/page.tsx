@@ -127,6 +127,8 @@ export default async function CardPage({ params }: CardPageProps) {
     location: card.location,
     socialLinks: card.socialLinks ? JSON.parse(JSON.stringify(card.socialLinks)) : {},
     services: card.services ? JSON.parse(JSON.stringify(card.services)) : [],
+    portfolio: card.portfolio ? JSON.parse(JSON.stringify(card.portfolio)) : [],
+    blocks: card.blocks || [],
     template: card.template,
     customization: {
       accentColor: card.customization?.accentColor || "#6366f1",
