@@ -557,7 +557,7 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
               )}
               <button
                 onClick={handleAddToContacts}
-                className={`w-full flex items-center justify-center space-x-2 py-2.5 text-xs font-bold text-white bg-gradient-to-r hover:opacity-95 shadow-md shadow-primary/10 transition-all ${getButtonStyleClass()}`}
+                className={`w-full flex items-center justify-center space-x-2 py-2.5 text-xs font-bold text-white bg-gradient-to-r hover:opacity-95 shadow-md shadow-primary/10 transition-all keep-white ${getButtonStyleClass()}`}
                 style={{ backgroundImage: `linear-gradient(135deg, ${customization.accentColor}, #06b6d4)` }}
               >
                 <UserPlus className="w-4.5 h-4.5" />
@@ -697,7 +697,7 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
               ))}
               <button
                 onClick={handleAddToContacts}
-                className={`w-full flex items-center justify-center space-x-2 py-2.5 text-xs font-black uppercase tracking-wider text-white bg-black hover:bg-neutral-800 transition-all ${getButtonStyleClass()}`}
+                className={`w-full flex items-center justify-center space-x-2 py-2.5 text-xs font-black uppercase tracking-wider text-white bg-black hover:bg-neutral-800 transition-all keep-white ${getButtonStyleClass()}`}
               >
                 <UserPlus className="w-4 h-4" />
                 <span>Add to Contacts</span>
@@ -781,7 +781,7 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
               href="https://dravion.site" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-1.5 bg-black border-2 border-black transition-all px-3 py-1.5 rounded-none text-[9px] font-extrabold text-white cursor-pointer"
+              className="inline-flex items-center space-x-1.5 bg-black border-2 border-black transition-all px-3 py-1.5 rounded-none text-[9px] font-extrabold text-white cursor-pointer keep-white"
             >
               <Sparkles className="w-3 h-3 text-white" />
               <span>POWERED BY DRAVION</span>
@@ -926,19 +926,7 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
         <div className="space-y-6">
           {blocks.map((b) => <React.Fragment key={b}>{renderBlock(b)}</React.Fragment>)}
         </div>
-        {!hideBranding && (
-          <div className="text-center pt-8 relative z-10">
-            <a 
-              href="https://dravion.site" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center space-x-1.5 bg-black/60 border border-white/5 hover:border-white/10 hover:bg-black/80 transition-all px-3 py-1.5 rounded-lg text-[9px] font-bold text-gray-400 hover:text-white cursor-pointer"
-            >
-              <Sparkles className="w-3 h-3 text-primary animate-pulse" />
-              <span>POWERED BY DRAVION</span>
-            </a>
-          </div>
-        )}
+        {!hideBranding && renderBrandingFooter()}
       </div>
     );
   };
@@ -1275,6 +1263,50 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
         }
         .is-light .accent-btn *, .is-dark .accent-btn * {
           color: var(--btn-text-color) !important;
+        }
+
+        /* Light mode overrides for keep-white elements (buttons/text with dark backgrounds) */
+        .is-light .keep-white, .is-light .keep-white * {
+          color: #ffffff !important;
+        }
+        .is-light .hover\\:text-white:hover, .is-light .hover\\:text-white:hover * {
+          color: #ffffff !important;
+        }
+
+        /* Light mode overrides for Glass Template panels */
+        .is-light .glass-panel {
+          background: rgba(255, 255, 255, 0.7) !important;
+          border-color: rgba(0, 0, 0, 0.08) !important;
+        }
+        .is-light .glass-panel-premium {
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%) !important;
+          border-color: rgba(0, 0, 0, 0.1) !important;
+          box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1) !important;
+        }
+
+        /* Light mode overrides for Creator Template backgrounds */
+        .is-light .bg-\\[\\#111\\] {
+          background-color: rgba(0, 0, 0, 0.03) !important;
+        }
+
+        /* Light mode overrides for Corporate Template backgrounds and borders */
+        .is-light .bg-slate-800\\/40 {
+          background-color: rgba(0, 0, 0, 0.04) !important;
+        }
+        .is-light .bg-slate-800\\/20 {
+          background-color: rgba(0, 0, 0, 0.02) !important;
+        }
+        .is-light .border-slate-700\\/30 {
+          border-color: rgba(0, 0, 0, 0.06) !important;
+        }
+        .is-light .border-slate-750\\/30 {
+          border-color: rgba(0, 0, 0, 0.06) !important;
+        }
+        .is-light .border-slate-800\\/40 {
+          border-color: rgba(0, 0, 0, 0.06) !important;
+        }
+        .is-light .hover\\:bg-slate-800\\/60:hover {
+          background-color: rgba(0, 0, 0, 0.08) !important;
         }
       `}} />
       {(() => {
