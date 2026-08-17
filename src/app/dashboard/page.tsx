@@ -167,7 +167,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Analytics Counter Panels */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {/* Card Views */}
         <div className="glass-panel p-5 rounded-xl border border-white/5 space-y-2 relative overflow-hidden">
           <div className="absolute top-4 right-4 text-primary bg-primary/10 p-1.5 rounded-lg">
@@ -175,15 +175,6 @@ export default function DashboardPage() {
           </div>
           <span className="text-xs text-gray-400 font-semibold uppercase tracking-wider block">Total Views</span>
           <h2 className="text-2xl md:text-3xl font-extrabold text-white">{statsData?.stats.views || 0}</h2>
-        </div>
-
-        {/* QR Scans */}
-        <div className="glass-panel p-5 rounded-xl border border-white/5 space-y-2 relative overflow-hidden">
-          <div className="absolute top-4 right-4 text-secondary bg-secondary/10 p-1.5 rounded-lg">
-            <QrCode className="w-4 h-4" />
-          </div>
-          <span className="text-xs text-gray-400 font-semibold uppercase tracking-wider block">QR Scans</span>
-          <h2 className="text-2xl md:text-3xl font-extrabold text-white">{statsData?.stats.qr_scans || 0}</h2>
         </div>
 
         {/* WhatsApp Clicks */}
