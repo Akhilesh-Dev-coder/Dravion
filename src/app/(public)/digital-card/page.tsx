@@ -22,7 +22,7 @@ export default function DigitalCardPage() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-grid-pattern py-16 px-4 sm:px-6 lg:px-8">
+    <div className="relative min-h-screen bg-grid-pattern py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background Orbs */}
       <div className="absolute top-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-[100px] pointer-events-none"></div>
