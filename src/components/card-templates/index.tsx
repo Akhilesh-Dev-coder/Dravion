@@ -212,7 +212,7 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
   } = data;
 
   const blocks = rawBlocks.filter((b) => b !== "portfolio");
-  const isLight = customization.themeMode === "light" || template === "swiss";
+  const isLight = customization.themeMode === "light";
 
   const getContrastColor = (hexcolor: string) => {
     if (!hexcolor || hexcolor.length < 6) return "text-white";
@@ -493,7 +493,7 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
 
     return (
       <div 
-        className={`min-h-full text-[#e4e4e7] flex flex-col justify-between p-6 relative ${getFontFamily()} ${isLight ? "is-light" : "is-dark"}`}
+        className={`flex-1 text-[#e4e4e7] flex flex-col justify-between p-6 relative ${getFontFamily()} ${isLight ? "is-light" : "is-dark"}`}
         style={getDynamicBackground()}
       >
         <div className="space-y-8">
@@ -635,7 +635,7 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
 
     return (
       <div 
-        className={`min-h-full text-white flex flex-col justify-between p-6 relative ${getFontFamily()} ${isLight ? "is-light" : "is-dark"}`}
+        className={`flex-1 text-white flex flex-col justify-between p-6 relative ${getFontFamily()} ${isLight ? "is-light" : "is-dark"}`}
         style={getDynamicBackground()}
       >
         <div className="space-y-8">
@@ -769,7 +769,7 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
 
     return (
       <div 
-        className={`min-h-full text-black flex flex-col justify-between p-6 relative ${getFontFamily()} ${isLight ? "is-light" : "is-dark"}`}
+        className={`flex-1 text-black flex flex-col justify-between p-6 relative ${getFontFamily()} ${isLight ? "is-light" : "is-dark"}`}
         style={getDynamicBackground()}
       >
         <div className="space-y-6">
@@ -920,7 +920,7 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
 
     return (
       <div 
-        className={`min-h-full bg-slate-950 text-white flex flex-col justify-between p-6 relative overflow-hidden ${getFontFamily()} ${isLight ? "is-light bg-[#f4f4f6] text-slate-800" : "is-dark"}`}
+        className={`flex-1 bg-slate-950 text-white flex flex-col justify-between p-6 relative overflow-hidden ${getFontFamily()} ${isLight ? "is-light bg-[#f4f4f6] text-slate-800" : "is-dark"}`}
         style={getDynamicBackground()}
       >
         <div className="space-y-6">
@@ -1061,7 +1061,7 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
 
     return (
       <div 
-        className={`min-h-full text-white flex flex-col justify-between p-4 relative ${getFontFamily()} ${isLight ? "is-light" : "is-dark"}`}
+        className={`flex-1 text-white flex flex-col justify-between p-4 relative ${getFontFamily()} ${isLight ? "is-light" : "is-dark"}`}
         style={getDynamicBackground()}
       >
         <div className="space-y-6">
@@ -1205,7 +1205,7 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
 
     return (
       <div 
-        className={`min-h-full bg-slate-900 text-slate-200 flex flex-col justify-between p-6 relative ${getFontFamily()} ${isLight ? "is-light bg-[#f4f4f6]" : "is-dark"}`}
+        className={`flex-1 bg-slate-900 text-slate-200 flex flex-col justify-between p-6 relative ${getFontFamily()} ${isLight ? "is-light bg-[#f4f4f6]" : "is-dark"}`}
         style={getDynamicBackground()}
       >
         <div className="space-y-6">
@@ -1307,6 +1307,29 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
         }
         .is-light .hover\\:bg-slate-800\\/60:hover {
           background-color: rgba(0, 0, 0, 0.08) !important;
+        }
+
+        /* Dark mode overrides for Swiss Template hover and solid button styling */
+        .is-dark .hover\\:bg-black:hover {
+          background-color: #ffffff !important;
+        }
+        .is-dark .hover\\:text-white:hover, .is-dark .hover\\:text-white:hover * {
+          color: #000000 !important;
+        }
+        .is-dark .hover\\:bg-black\\/5:hover {
+          background-color: rgba(255, 255, 255, 0.05) !important;
+        }
+        .is-dark .bg-black {
+          background-color: #ffffff !important;
+        }
+        .is-dark .bg-black * {
+          color: #000000 !important;
+        }
+        .is-dark .text-white {
+          color: #000000 !important;
+        }
+        .is-dark .hover\\:bg-neutral-800:hover {
+          background-color: #e5e5e5 !important;
         }
       `}} />
       {(() => {

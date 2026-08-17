@@ -119,7 +119,7 @@ export default function PublicCardClient({ card }: { card: ICardData }) {
     }
   };
 
-  const isLight = hydratedCard.customization.themeMode === "light" || hydratedCard.template === "swiss";
+  const isLight = hydratedCard.customization.themeMode === "light";
 
   return (
     <main 
@@ -137,7 +137,7 @@ export default function PublicCardClient({ card }: { card: ICardData }) {
       
       {/* Target card device wrapper */}
       <div 
-        className={`w-full max-w-sm rounded-[32px] overflow-hidden shadow-2xl relative z-10 min-h-[560px] border ${
+        className={`w-full max-w-sm rounded-[32px] overflow-hidden shadow-2xl relative z-10 min-h-[560px] border flex flex-col ${
           isLight ? "border-black/10 bg-[#f4f4f6]" : "border-white/5 bg-[#0b0f19]"
         }`}
       >

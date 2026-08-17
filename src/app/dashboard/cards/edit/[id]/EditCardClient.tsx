@@ -1105,7 +1105,7 @@ export default function EditCardClient({ cardId }: { cardId: string }) {
             <div className="w-72 h-[500px] bg-slate-950 border-[7px] border-slate-800 rounded-[36px] overflow-hidden shadow-2xl relative">
               <div className="w-24 h-4 bg-slate-800 absolute top-0 left-1/2 -translate-x-1/2 rounded-b-xl z-20"></div>
               {/* Inner card rendering */}
-              <div className="h-full overflow-y-auto pt-6 scrollbar-none">
+              <div className="h-full overflow-y-auto pt-6 scrollbar-none flex flex-col">
                 <CardTemplate data={card as any} hideBranding={false} />
               </div>
             </div>
@@ -1125,7 +1125,7 @@ export default function EditCardClient({ cardId }: { cardId: string }) {
             >
               <X className="w-4 h-4" />
             </button>
-            <div className="h-full overflow-y-auto pt-6 scrollbar-none">
+            <div className="h-full overflow-y-auto pt-6 scrollbar-none flex flex-col">
               <CardTemplate data={card as any} hideBranding={false} />
             </div>
           </div>
