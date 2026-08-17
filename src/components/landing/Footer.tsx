@@ -84,8 +84,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="mailto:info@dravion.site" className="text-sm text-gray-400 hover:text-white transition-colors">
-                  info@dravion.site
+                <a href="mailto:dravion456@gmail.com" className="text-sm text-gray-400 hover:text-white transition-colors">
+                  dravion456@gmail.com
                 </a>
               </li>
             </ul>

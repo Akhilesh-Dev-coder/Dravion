@@ -1,7 +1,26 @@
 "use client";
 
 import React, { useState } from "react";
-import { Mail, MessageSquare, Send, CheckCircle2, User, Loader2, ArrowRight } from "lucide-react";
+import { Mail, MessageSquare, Send, CheckCircle2, User, Loader2, ArrowRight, MessageCircle } from "lucide-react";
+
+const InstagramIcon = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
 
 export default function ContactPage() {
   const [name, setName] = useState("");
@@ -22,10 +41,19 @@ export default function ContactPage() {
     setLoading(true);
     setError(null);
 
-    // Simulate sending form submission
+    // Simulate sending form submission and redirecting to Gmail compose
     setTimeout(() => {
       setLoading(false);
       setSuccess(true);
+
+      const subject = encodeURIComponent(`Dravion Project Inquiry - ${name}`);
+      const body = encodeURIComponent(`Hello Dravion Team,\n\nI have submitted a project inquiry on your website. Here are my details:\n\nName: ${name}\nEmail: ${email}\nService of Interest: ${service}\n\nProject Summary / Message:\n${message}\n\nBest regards,\n${name}`);
+      
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=dravion456@gmail.com&su=${subject}&body=${body}`;
+      
+      // Open Gmail compose in a new tab
+      window.open(gmailUrl, "_blank");
+
       setName("");
       setEmail("");
       setMessage("");
@@ -62,7 +90,15 @@ export default function ContactPage() {
             <div className="space-y-4 text-xs">
               <div className="flex items-center space-x-3 text-gray-300">
                 <Mail className="w-4 h-4 text-primary shrink-0" />
-                <a href="mailto:info@dravion.site" className="hover:underline">info@dravion.site</a>
+                <a href="mailto:dravion456@gmail.com" className="hover:underline">dravion456@gmail.com</a>
+              </div>
+              <div className="flex items-center space-x-3 text-gray-300">
+                <InstagramIcon className="w-4 h-4 text-secondary shrink-0" />
+                <a href="https://instagram.com/dravion_tech" target="_blank" rel="noopener noreferrer" className="hover:underline">@dravion_tech</a>
+              </div>
+              <div className="flex items-center space-x-3 text-gray-300">
+                <MessageCircle className="w-4 h-4 text-primary shrink-0" />
+                <a href="https://wa.me/919074311597" target="_blank" rel="noopener noreferrer" className="hover:underline">+91 9074311597</a>
               </div>
               <div className="flex items-center space-x-3 text-gray-300">
                 <MessageSquare className="w-4 h-4 text-secondary shrink-0" />
