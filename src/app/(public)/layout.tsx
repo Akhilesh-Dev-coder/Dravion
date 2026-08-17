@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import WhatsAppCTA from "@/components/landing/WhatsAppCTA";
 
 export default function PublicLayout({
   children,
@@ -12,6 +13,7 @@ export default function PublicLayout({
       <Navbar />
       <main className="flex-grow pt-16">{children}</main>
       <Footer />
+      <WhatsAppCTA />
     </div>
   );
 }

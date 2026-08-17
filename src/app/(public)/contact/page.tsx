@@ -41,7 +41,7 @@ export default function ContactPage() {
     setLoading(true);
     setError(null);
 
-    // Simulate sending form submission and redirecting to Gmail compose
+    // Simulate sending form submission and redirecting
     setTimeout(() => {
       setLoading(false);
       setSuccess(true);
@@ -49,10 +49,16 @@ export default function ContactPage() {
       const subject = encodeURIComponent(`Dravion Project Inquiry - ${name}`);
       const body = encodeURIComponent(`Hello Dravion Team,\n\nI have submitted a project inquiry on your website. Here are my details:\n\nName: ${name}\nEmail: ${email}\nService of Interest: ${service}\n\nProject Summary / Message:\n${message}\n\nBest regards,\n${name}`);
       
-      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=dravion456@gmail.com&su=${subject}&body=${body}`;
+      // Detect if user is on a mobile device
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
       
-      // Open Gmail compose in a new tab
-      window.open(gmailUrl, "_blank");
+      if (isMobile) {
+        const mailtoUrl = `mailto:dravion456@gmail.com?subject=${subject}&body=${body}`;
+        window.location.href = mailtoUrl;
+      } else {
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=dravion456@gmail.com&su=${subject}&body=${body}`;
+        window.open(gmailUrl, "_blank");
+      }
 
       setName("");
       setEmail("");
