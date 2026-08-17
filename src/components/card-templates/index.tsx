@@ -769,7 +769,7 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
 
     return (
       <div 
-        className={`flex-1 text-black flex flex-col justify-between p-6 relative ${getFontFamily()} ${isLight ? "is-light" : "is-dark"}`}
+        className={`flex-1 template-swiss text-black flex flex-col justify-between p-6 relative ${getFontFamily()} ${isLight ? "is-light" : "is-dark"}`}
         style={getDynamicBackground()}
       >
         <div className="space-y-6">
@@ -1310,25 +1310,22 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
         }
 
         /* Dark mode overrides for Swiss Template hover and solid button styling */
-        .is-dark .hover\\:bg-black:hover {
+        .template-swiss.is-dark .hover\\:bg-black:hover {
           background-color: #ffffff !important;
         }
-        .is-dark .hover\\:text-white:hover, .is-dark .hover\\:text-white:hover * {
+        .template-swiss.is-dark .hover\\:text-white:hover, .template-swiss.is-dark .hover\\:text-white:hover * {
           color: #000000 !important;
         }
-        .is-dark .hover\\:bg-black\\/5:hover {
+        .template-swiss.is-dark .hover\\:bg-black\\/5:hover {
           background-color: rgba(255, 255, 255, 0.05) !important;
         }
-        .is-dark .bg-black {
+        .template-swiss.is-dark .bg-black {
           background-color: #ffffff !important;
         }
-        .is-dark .bg-black * {
+        .template-swiss.is-dark .bg-black *, .template-swiss.is-dark .bg-black.text-white, .template-swiss.is-dark .bg-black .text-white {
           color: #000000 !important;
         }
-        .is-dark .text-white {
-          color: #000000 !important;
-        }
-        .is-dark .hover\\:bg-neutral-800:hover {
+        .template-swiss.is-dark .hover\\:bg-neutral-800:hover {
           background-color: #e5e5e5 !important;
         }
       `}} />
