@@ -212,7 +212,21 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
   } = data;
 
   const blocks = rawBlocks.filter((b) => b !== "portfolio");
-  const isLight = customization.themeMode === "light";
+  const isLight = customization.themeMode === "light" || template === "swiss";
+
+  const getContrastColor = (hexcolor: string) => {
+    if (!hexcolor || hexcolor.length < 6) return "text-white";
+    const hex = hexcolor.replace("#", "");
+    if (hex.length !== 6) return "text-white";
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+    return (yiq >= 140) ? "text-slate-950" : "text-white";
+  };
+
+  const accentTextClass = getContrastColor(customization.accentColor);
+  const accentTextColor = accentTextClass === "text-white" ? "#ffffff" : "#0f172a";
 
   const theme = {
     textPrimary: isLight ? "text-slate-900" : "text-white",
@@ -402,8 +416,11 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
               )}
               <button
                 onClick={handleAddToContacts}
-                className={`w-full flex items-center justify-center space-x-2 py-2.5 text-xs font-bold uppercase tracking-wider text-black transition-all hover:opacity-95 ${getButtonStyleClass()}`}
-                style={{ backgroundColor: customization.accentColor }}
+                className={`w-full flex items-center justify-center space-x-2 py-2.5 text-xs font-bold uppercase tracking-wider transition-all hover:opacity-95 accent-btn ${getButtonStyleClass()}`}
+                style={{ 
+                  backgroundColor: customization.accentColor,
+                  "--btn-text-color": accentTextColor
+                } as any}
               >
                 <UserPlus className="w-4 h-4" />
                 <span>Add to Contacts</span>
@@ -978,8 +995,11 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
               )}
               <button
                 onClick={handleAddToContacts}
-                className={`w-full flex items-center justify-center space-x-2 py-2.5 text-xs font-bold text-black hover:opacity-90 transition-all ${getButtonStyleClass()}`}
-                style={{ backgroundColor: customization.accentColor }}
+                className={`w-full flex items-center justify-center space-x-2 py-2.5 text-xs font-bold hover:opacity-90 transition-all accent-btn ${getButtonStyleClass()}`}
+                style={{ 
+                  backgroundColor: customization.accentColor,
+                  "--btn-text-color": accentTextColor
+                } as any}
               >
                 <UserPlus className="w-4 h-4" />
                 <span>Save Profile Contacts</span>
@@ -1121,8 +1141,11 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
               )}
               <button
                 onClick={handleAddToContacts}
-                className={`w-full flex items-center justify-center space-x-2 py-3 text-xs font-bold uppercase tracking-wider text-white transition-all shadow-md shadow-slate-900/10 ${getButtonStyleClass()}`}
-                style={{ backgroundColor: customization.accentColor }}
+                className={`w-full flex items-center justify-center space-x-2 py-3 text-xs font-bold uppercase tracking-wider transition-all shadow-md shadow-slate-900/10 accent-btn ${getButtonStyleClass()}`}
+                style={{ 
+                  backgroundColor: customization.accentColor,
+                  "--btn-text-color": accentTextColor
+                } as any}
               >
                 <UserPlus className="w-4 h-4" />
                 <span>Save Corporate Contacts</span>
@@ -1245,6 +1268,14 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
         .is-dark .text-black { color: #f8fafc !important; }
         .is-dark .bg-white { background-color: rgba(0, 0, 0, 0.4) !important; }
         .is-dark .border-black { border-color: rgba(255, 255, 255, 0.1) !important; }
+        
+        /* Custom solid button overrides to prevent is-light/is-dark color bleeding */
+        .is-light .accent-btn, .is-dark .accent-btn {
+          color: var(--btn-text-color) !important;
+        }
+        .is-light .accent-btn *, .is-dark .accent-btn * {
+          color: var(--btn-text-color) !important;
+        }
       `}} />
       {(() => {
         switch (template) {
