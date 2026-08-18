@@ -1,6 +1,19 @@
 import React from "react";
 import Link from "next/link";
 import { Check, ShieldAlert, Sparkles, Building2, HelpCircle } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Affordable Pricing & Free Digital Business Cards | Dravion",
+  description: "Check Dravion pricing plans. Get a digital visiting card for free or upgrade to customized features. Find affordable website costs, SaaS pricing, and mobile app plans.",
+  keywords: [
+    "visiting card for free",
+    "digital visiting card",
+    "website costs",
+    "affordable websites",
+    "digital business card pricing"
+  ]
+};
 
 export default function ProductsPage() {
   const plans = [

@@ -1,6 +1,25 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowRight, Laptop, Cpu, Globe, Rocket, ArrowUpRight, CheckCircle } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dravion | High-Performance Web Agency & Free Digital Business Cards",
+  description: "Dravion builds next-gen web systems, custom SaaS suites, and mobile apps. Create a professional digital visiting card for free or request a custom website design.",
+  keywords: [
+    "dravion",
+    "visiting card for free",
+    "digital visiting card",
+    "online presence",
+    "online pressence",
+    "visiting cards",
+    "digital visiting cards",
+    "website costs",
+    "affordable websites",
+    "webapps",
+    "mobile apps"
+  ]
+};
 
 export default function HomePage() {
   const services = [

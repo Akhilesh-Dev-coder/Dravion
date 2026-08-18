@@ -21,6 +21,25 @@ export const metadata: Metadata = {
     template: "%s | Dravion"
   },
   description: "Building digital experiences that grow businesses. Create your professional digital visiting card for free or hire our premium engineering agency for web, mobile, and AI solutions.",
+  keywords: [
+    "dravion",
+    "visiting card for free",
+    "digital visiting card",
+    "online presence",
+    "online pressence",
+    "visiting cards",
+    "digital visiting cards",
+    "website costs",
+    "affordable websites",
+    "webapps",
+    "mobile apps",
+    "free digital business card",
+    "business card creator",
+    "custom web design cost",
+    "saas development agency",
+    "hire web developers",
+    "affordable app builder"
+  ],
   metadataBase: new URL("https://dravion.site"),
   alternates: {
     canonical: "/",

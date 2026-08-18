@@ -1,6 +1,20 @@
 import React from "react";
 import Link from "next/link";
 import { Globe, Server, Smartphone, Brain, Shield, Clock, HelpCircle, ArrowRight } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Professional Web Development Services & Mobile App Engineering | Dravion",
+  description: "Hire our software development agency for custom webapps, responsive websites, mobile apps (iOS & Android), SaaS platforms, and enterprise solutions. Affordable, fast, and scalable.",
+  keywords: [
+    "webapps",
+    "mobile apps",
+    "affordable websites",
+    "website costs",
+    "web development services",
+    "custom software agency"
+  ]
+};
 
 export default function ServicesPage() {
   const serviceCards = [

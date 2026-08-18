@@ -1,6 +1,22 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowRight, QrCode, Smartphone, Share2, Palette, ShieldCheck, Heart } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Free Digital Visiting Card & Smart Business Card Maker | Dravion",
+  description: "Create your free digital visiting card in minutes. Showcase your contact details, social links, portfolio, and download your custom QR code to grow your online presence.",
+  keywords: [
+    "digital visiting card",
+    "visiting card for free",
+    "visiting cards",
+    "digital visiting cards",
+    "online presence",
+    "online pressence",
+    "free digital business card",
+    "smart business card maker"
+  ]
+};
 
 export default function DigitalCardPage() {
   const steps = [
