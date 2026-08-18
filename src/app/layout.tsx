@@ -40,14 +40,14 @@ export const metadata: Metadata = {
     "hire web developers",
     "affordable app builder"
   ],
-  metadataBase: new URL("https://dravion.site"),
+  metadataBase: new URL("https://www.dravion.site"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Dravion | Web Agency & Digital Card SaaS",
     description: "Create your free professional digital business card in minutes, or build custom enterprise websites and AI applications.",
-    url: "https://dravion.site",
+    url: "https://www.dravion.site",
     siteName: "Dravion",
     locale: "en_US",
     type: "website",

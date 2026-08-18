@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://dravion.site";
+  const baseUrl = "https://www.dravion.site";
   
   // All public marketing routes that should be crawled and indexed
   const routes = [
