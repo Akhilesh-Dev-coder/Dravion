@@ -493,7 +493,7 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
 
     return (
       <div 
-        className={`flex-1 text-[#e4e4e7] flex flex-col justify-between p-6 relative ${getFontFamily()} ${isLight ? "is-light" : "is-dark"}`}
+        className={`min-h-full w-full shrink-0 text-[#e4e4e7] flex flex-col justify-between p-6 relative ${getFontFamily()} ${isLight ? "is-light" : "is-dark"}`}
         style={getDynamicBackground()}
       >
         <div className="space-y-8">
@@ -635,7 +635,7 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
 
     return (
       <div 
-        className={`flex-1 text-white flex flex-col justify-between p-6 relative ${getFontFamily()} ${isLight ? "is-light" : "is-dark"}`}
+        className={`min-h-full w-full shrink-0 text-white flex flex-col justify-between p-6 relative ${getFontFamily()} ${isLight ? "is-light" : "is-dark"}`}
         style={getDynamicBackground()}
       >
         <div className="space-y-8">
@@ -769,7 +769,7 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
 
     return (
       <div 
-        className={`flex-1 template-swiss text-black flex flex-col justify-between p-6 relative ${getFontFamily()} ${isLight ? "is-light" : "is-dark"}`}
+        className={`min-h-full w-full shrink-0 template-swiss text-black flex flex-col justify-between p-6 relative ${getFontFamily()} ${isLight ? "is-light" : "is-dark"}`}
         style={getDynamicBackground()}
       >
         <div className="space-y-6">
@@ -920,7 +920,7 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
 
     return (
       <div 
-        className={`flex-1 bg-slate-950 text-white flex flex-col justify-between p-6 relative overflow-hidden ${getFontFamily()} ${isLight ? "is-light bg-[#f4f4f6] text-slate-800" : "is-dark"}`}
+        className={`min-h-full w-full shrink-0 bg-slate-950 text-white flex flex-col justify-between p-6 relative overflow-hidden ${getFontFamily()} ${isLight ? "is-light bg-[#f4f4f6] text-slate-800" : "is-dark"}`}
         style={getDynamicBackground()}
       >
         <div className="space-y-6">
@@ -1061,7 +1061,7 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
 
     return (
       <div 
-        className={`flex-1 text-white flex flex-col justify-between p-4 relative ${getFontFamily()} ${isLight ? "is-light" : "is-dark"}`}
+        className={`min-h-full w-full shrink-0 text-white flex flex-col justify-between p-4 relative ${getFontFamily()} ${isLight ? "is-light" : "is-dark"}`}
         style={getDynamicBackground()}
       >
         <div className="space-y-6">
@@ -1205,7 +1205,7 @@ export default function CardTemplate({ data, onLinkClick, hideBranding = false }
 
     return (
       <div 
-        className={`flex-1 bg-slate-900 text-slate-200 flex flex-col justify-between p-6 relative ${getFontFamily()} ${isLight ? "is-light bg-[#f4f4f6]" : "is-dark"}`}
+        className={`min-h-full w-full shrink-0 bg-slate-900 text-slate-200 flex flex-col justify-between p-6 relative ${getFontFamily()} ${isLight ? "is-light bg-[#f4f4f6]" : "is-dark"}`}
         style={getDynamicBackground()}
       >
         <div className="space-y-6">
