@@ -19,7 +19,7 @@ export default function QRModal({ isOpen, onClose, username, cardName, profileIm
 
   const cardLink = `${
     typeof window !== "undefined" 
-      ? window.location.origin.replace("localhost", "192.168.29.5").replace("127.0.0.1", "192.168.29.5") 
+      ? window.location.origin 
       : "https://dravion.site"
   }/card/${username}`;
 

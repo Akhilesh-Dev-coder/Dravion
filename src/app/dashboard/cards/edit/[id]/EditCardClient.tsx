@@ -1258,7 +1258,7 @@ export default function EditCardClient({ cardId }: { cardId: string }) {
           setShowQRModal(false);
           router.push("/dashboard");
         }}
-        username={card.username}
+        username={card.uniqueCode || card.username}
         cardName={card.name}
         profileImage={card.profileImage}
       />
