@@ -13,6 +13,7 @@ import {
   Trash2, 
   Loader2, 
   ArrowLeft, 
+  ArrowRight,
   Save, 
   Eye, 
   Image as ImageIcon,
@@ -25,6 +26,7 @@ import {
   ArrowDown
 } from "lucide-react";
 import CardTemplate from "@/components/card-templates";
+import QRModal from "@/components/dashboard/QRModal";
 
 interface IService {
   name: string;
@@ -89,6 +91,16 @@ const themeColors = [
   { name: "Slate", hex: "#64748b" }
 ];
 
+const formSteps = [
+  { id: "basic", label: "Basic Info", nextLabel: "Contact Channels", icon: <User className="w-3.5 h-3.5" /> },
+  { id: "contact", label: "Contact", nextLabel: "Social Networks", icon: <Phone className="w-3.5 h-3.5" /> },
+  { id: "social", label: "Social", nextLabel: "Service List", icon: <Share2 className="w-3.5 h-3.5" /> },
+  { id: "services", label: "Services", nextLabel: "Layout Ordering", icon: <Briefcase className="w-3.5 h-3.5" /> },
+  { id: "layout", label: "Layout", nextLabel: "Visual Styling", icon: <Layers className="w-3.5 h-3.5" /> },
+  { id: "styling", label: "Visual Style", nextLabel: "Live Preview", icon: <Palette className="w-3.5 h-3.5" /> },
+  { id: "preview", label: "Preview", nextLabel: "Save & Publish", icon: <Eye className="w-3.5 h-3.5" /> }
+] as const;
+
 export default function EditCardClient({ cardId }: { cardId: string }) {
   const router = useRouter();
 
@@ -96,22 +108,23 @@ export default function EditCardClient({ cardId }: { cardId: string }) {
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<"basic" | "contact" | "social" | "services" | "portfolio" | "layout" | "styling">("basic");
+  const [activeTab, setActiveTab] = useState<"basic" | "contact" | "social" | "services" | "portfolio" | "layout" | "styling" | "preview">("basic");
   
-  // Mobile preview modal toggle
-  const [showMobilePreview, setShowMobilePreview] = useState(false);
+  const [showQRModal, setShowQRModal] = useState(false);
 
-  // Lock body scroll when mobile preview is active
+  // Scroll the active tab button into view on mobile
   useEffect(() => {
-    if (showMobilePreview) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
+    const activeTabElement = document.getElementById(`tab-btn-${activeTab}`);
+    if (activeTabElement) {
+      activeTabElement.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
     }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [showMobilePreview]);
+  }, [activeTab]);
+
+
 
   // Card form state
   const [card, setCard] = useState<ICardData | null>(null);
@@ -333,7 +346,7 @@ export default function EditCardClient({ cardId }: { cardId: string }) {
           spread: 60,
           origin: { y: 0.8 }
         });
-        alert("Digital Visiting Card saved and published successfully!");
+        setShowQRModal(true);
       } else {
         const errData = await res.json();
         setError(errData.error || "Save operation failed.");
@@ -374,8 +387,11 @@ export default function EditCardClient({ cardId }: { cardId: string }) {
         <div className="flex items-center space-x-2">
           {/* Mobile Preview toggle */}
           <button
-            onClick={() => setShowMobilePreview(true)}
-            className="flex sm:hidden items-center space-x-1 px-3 py-2 bg-white/5 border border-white/10 text-gray-300 text-xs font-semibold rounded-lg cursor-pointer"
+            onClick={() => {
+              setActiveTab("preview");
+              document.getElementById("form-container")?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }}
+            className="flex lg:hidden items-center space-x-1 px-3 py-2 bg-white/5 border border-white/10 text-gray-300 text-xs font-semibold rounded-lg cursor-pointer"
           >
             <Eye className="w-3.5 h-3.5" />
             <span>Preview</span>
@@ -421,22 +437,34 @@ export default function EditCardClient({ cardId }: { cardId: string }) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Side forms (7 cols) */}
         <div className="lg:col-span-7 space-y-6">
+          {/* Progress Header & Bar for Wizard Flow */}
+          <div className="space-y-2">
+            <div className="flex justify-between items-center px-1">
+              <span className="text-[10px] font-bold text-primary uppercase tracking-widest">
+                Step {formSteps.findIndex((s) => s.id === activeTab) + 1} of {formSteps.length}
+              </span>
+              <span className="text-[10px] text-gray-400 font-semibold">
+                {Math.round(((formSteps.findIndex((s) => s.id === activeTab) + 1) / formSteps.length) * 100)}% Complete
+              </span>
+            </div>
+            <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-300 ease-out"
+                style={{ width: `${((formSteps.findIndex((s) => s.id === activeTab) + 1) / formSteps.length) * 100}%` }}
+              />
+            </div>
+          </div>
+
           {/* Tab Selection Bar - Sticky on Mobile for easy switching */}
-          <div className="sticky top-16 z-30 flex overflow-x-auto bg-[#0b0f19]/90 border border-white/5 rounded-xl p-1.5 gap-1.5 scrollbar-none backdrop-blur-md shadow-lg shadow-black/30">
-            {[
-              { id: "basic", label: "Basic Info", icon: <User className="w-3.5 h-3.5" /> },
-              { id: "contact", label: "Contact", icon: <Phone className="w-3.5 h-3.5" /> },
-              { id: "social", label: "Social", icon: <Share2 className="w-3.5 h-3.5" /> },
-              { id: "services", label: "Services", icon: <Briefcase className="w-3.5 h-3.5" /> },
-              { id: "layout", label: "Layout", icon: <Layers className="w-3.5 h-3.5" /> },
-              { id: "styling", label: "Visual Style", icon: <Palette className="w-3.5 h-3.5" /> }
-            ].map((tab) => (
+          <div className="sticky top-16 z-30 flex overflow-x-auto bg-[#0b0f19]/90 border border-[#2e3b5e]/20 rounded-xl p-1.5 gap-1.5 scrollbar-none backdrop-blur-md shadow-lg shadow-black/30">
+            {formSteps.map((tab) => (
               <button
                 key={tab.id}
+                id={`tab-btn-${tab.id}`}
                 onClick={() => setActiveTab(tab.id as any)}
                 className={`flex items-center space-x-1.5 px-3.5 py-2.5 rounded-lg text-xs font-bold whitespace-nowrap transition-colors cursor-pointer ${
                   activeTab === tab.id
-                    ? "bg-primary text-white"
+                    ? "bg-primary text-white shadow-md shadow-primary/20"
                     : "text-slate-400 hover:text-white hover:bg-white/5"
                 }`}
               >
@@ -447,7 +475,7 @@ export default function EditCardClient({ cardId }: { cardId: string }) {
           </div>
 
           {/* Form Content cards */}
-          <div className="glass-panel p-6 rounded-2xl border border-white/5 space-y-6 min-h-[400px]">
+          <div id="form-container" className="glass-panel p-6 rounded-2xl border border-white/5 space-y-6 min-h-[400px] scroll-mt-24">
             {/* 1. Basic Info Tab */}
             {activeTab === "basic" && (
               <div className="space-y-4">
@@ -1121,6 +1149,86 @@ export default function EditCardClient({ cardId }: { cardId: string }) {
                 </div>
               </div>
             )}
+
+            {activeTab === "preview" && (
+              <div className="space-y-6 flex flex-col items-center">
+                <div className="text-center space-y-1.5 w-full">
+                  <h3 className="text-sm font-bold text-white">Live Card Preview</h3>
+                  <p className="text-[11px] text-gray-400">This is how your digital visiting card looks to public visitors.</p>
+                </div>
+                
+                {/* Phone mockup container */}
+                <div className="w-72 h-[480px] bg-slate-950 border-[7px] border-slate-800 rounded-[36px] overflow-hidden shadow-2xl relative">
+                  <div className="w-24 h-4 bg-slate-800 absolute top-0 left-1/2 -translate-x-1/2 rounded-b-xl z-20"></div>
+                  <div className="h-full overflow-y-auto pt-6 scrollbar-none flex flex-col" style={{ overscrollBehavior: "contain" }}>
+                    <CardTemplate data={card as any} hideBranding={false} />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Step-by-Step Bottom Navigation Footer */}
+            {(() => {
+              const currentIndex = formSteps.findIndex((s) => s.id === activeTab);
+              if (currentIndex === -1) return null;
+              
+              return (
+                <div className="flex items-center justify-between pt-6 border-t border-white/5 mt-6 gap-3">
+                  {currentIndex > 0 ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const prevTab = formSteps[currentIndex - 1].id;
+                        setActiveTab(prevTab as any);
+                        document.getElementById("form-container")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                      }}
+                      className="flex items-center space-x-1.5 px-4 py-2.5 rounded-lg bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white text-xs font-bold border border-white/10 transition-all cursor-pointer"
+                    >
+                      <ArrowLeft className="w-3.5 h-3.5" />
+                      <span>Back</span>
+                    </button>
+                  ) : (
+                    <div />
+                  )}
+
+                  <div className="flex items-center space-x-2">
+                    {currentIndex < formSteps.length - 1 ? (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const nextTab = formSteps[currentIndex + 1].id;
+                          setActiveTab(nextTab as any);
+                          document.getElementById("form-container")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }}
+                        className="flex items-center space-x-1.5 px-5 py-2.5 rounded-lg bg-gradient-to-r from-primary to-accent hover:opacity-95 text-white text-xs font-bold transition-all shadow-md shadow-primary/10 cursor-pointer"
+                      >
+                        <span>Next: {formSteps[currentIndex + 1].nextLabel}</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={handleSave}
+                        disabled={saving}
+                        className="flex items-center space-x-1.5 px-6 py-2.5 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 hover:opacity-95 text-white text-xs font-bold transition-all shadow-md shadow-emerald-500/10 cursor-pointer disabled:opacity-50"
+                      >
+                        {saving ? (
+                          <>
+                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                            <span>Saving...</span>
+                          </>
+                        ) : (
+                          <>
+                            <Check className="w-3.5 h-3.5" />
+                            <span>Save & Publish Card</span>
+                          </>
+                        )}
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            })()}
           </div>
         </div>
 
@@ -1143,33 +1251,17 @@ export default function EditCardClient({ cardId }: { cardId: string }) {
         </div>
       </div>
 
-      {/* Mobile Preview Modal */}
-      {showMobilePreview && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 px-4 md:hidden">
-          <div className="absolute inset-0" onClick={() => setShowMobilePreview(false)}></div>
-          <div className="relative z-10 w-72 h-[480px] bg-slate-950 border-[6px] border-slate-800 rounded-[32px] overflow-hidden shadow-2xl">
-            <div className="w-20 h-4 bg-slate-800 absolute top-0 left-1/2 -translate-x-1/2 rounded-b-xl z-20"></div>
-            <button
-              onClick={() => setShowMobilePreview(false)}
-              className="absolute top-6 right-6 bg-black/60 text-white rounded-full p-1.5 z-30 cursor-pointer"
-            >
-              <X className="w-4 h-4" />
-            </button>
-            <div className="h-full overflow-y-auto pt-6 scrollbar-none flex flex-col" style={{ overscrollBehavior: "contain" }}>
-              <CardTemplate data={card as any} hideBranding={false} />
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Sharing QR & Link Modal popup */}
+      <QRModal
+        isOpen={showQRModal}
+        onClose={() => {
+          setShowQRModal(false);
+          router.push("/dashboard");
+        }}
+        username={card.username}
+        cardName={card.name}
+        profileImage={card.profileImage}
+      />
     </div>
-  );
-}
-
-// Simple Mobile Modal close icon
-function X({ className }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-    </svg>
   );
 }

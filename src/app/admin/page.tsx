@@ -205,7 +205,7 @@ export default function AdminPage() {
     }
   };
 
-  const handleSendIntroEmail = async (userId: string, email: string) => {
+  const handleSendIntroEmail = async (userId: string, email: string, userName: string) => {
     setEmailStatus(prev => ({ ...prev, [userId]: "sending" }));
     try {
       const res = await fetch(`/api/admin/users/${userId}/send-intro`, {
@@ -214,6 +214,22 @@ export default function AdminPage() {
 
       if (res.ok) {
         setEmailStatus(prev => ({ ...prev, [userId]: "success" }));
+
+        // Prefilled Email fields matching the console simulation
+        const subject = "Welcome to Dravion - Introduction to Our Services";
+        const body = `Dear ${userName},\n\nWelcome to Dravion SaaS suite! We are pleased to introduce our digital business platform.\n\nDravion is a custom development and software design studio offering premium high-performance web systems, custom cloud applications, and AI integrations.\n\nYou can manage and customize your free digital visiting card inside your profile space:\n👉 https://dravion.site/dashboard\n\nBest Regards,\nDravion Tech Studio Team`;
+
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        if (isMobile) {
+          // Open standard mailto link to launch mobile system mail client (Gmail app, etc)
+          window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        } else {
+          // Open Gmail Compose directly in a browser tab for desktop/laptops
+          const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          window.open(gmailUrl, "_blank");
+        }
+
         setTimeout(() => {
           setEmailStatus(prev => ({ ...prev, [userId]: "idle" }));
         }, 3000);
@@ -454,7 +470,7 @@ export default function AdminPage() {
                         <div className="flex items-center justify-center space-x-3">
                           {/* Send introduction mail */}
                           <button
-                            onClick={() => handleSendIntroEmail(user._id, user.email)}
+                            onClick={() => handleSendIntroEmail(user._id, user.email, user.name)}
                             disabled={emailStatus[user._id] === "sending" || user.role === "admin"}
                             className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg border text-[10px] font-bold transition-all cursor-pointer ${
                               emailStatus[user._id] === "success"
