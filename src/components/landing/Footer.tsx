@@ -52,6 +52,11 @@ export default function Footer() {
             <h3 className="text-xs font-semibold text-gray-200 uppercase tracking-wider mb-4">Products</h3>
             <ul className="space-y-2">
               <li>
+                <Link href="/study" className="text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors">
+                  Dravion Study
+                </Link>
+              </li>
+              <li>
                 <Link href="/digital-card" className="text-sm text-gray-400 hover:text-white transition-colors">
                   Digital Visiting Card
                 </Link>

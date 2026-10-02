@@ -15,6 +15,7 @@ export default function Navbar() {
     { name: "Services", href: "/services" },
     { name: "Products", href: "/products" },
     { name: "Digital Card", href: "/digital-card" },
+    { name: "Study", href: "/study" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
   ];
