@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect } from "react";
 
 interface AdSlotProps {
   position: "study-home" | "subject-page" | "chapter-page" | "dashboard" | "pdf-bottom" | "pdf-top" | "mobile-banner";
@@ -14,12 +16,19 @@ interface AdSlotProps {
 export default function AdSlot({
   position,
   className = "",
-  adClient,
-  adSlotId,
+  adClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT || "ca-pub-1988525992738589",
+  adSlotId = process.env.NEXT_PUBLIC_ADSENSE_SLOT || "9466776499",
 }: AdSlotProps) {
-  const isDev = process.env.NODE_ENV === "development";
+  useEffect(() => {
+    try {
+      if (typeof window !== "undefined" && adClient && adSlotId) {
+        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+      }
+    } catch {
+      // Ignore adsbygoogle duplicate push errors
+    }
+  }, [adClient, adSlotId]);
 
-  // If live ad details are provided, render Google AdSense / Ad unit script tag container
   if (adClient && adSlotId) {
     return (
       <div
