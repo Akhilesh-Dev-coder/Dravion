@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 
 export default function StudyLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex flex-col min-h-screen bg-[#0d0f12] text-foreground font-sans selection:bg-blue-600 selection:text-white">
+    <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-600 selection:text-white">
       <StudyNavbar />
       <main className="flex-grow">{children}</main>
       <StudyFooter />
