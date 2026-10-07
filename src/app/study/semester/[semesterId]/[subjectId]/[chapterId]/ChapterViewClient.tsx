@@ -27,6 +27,103 @@ export default function ChapterViewClient({
 }: ChapterViewClientProps) {
   const [materials] = useState<any[]>(initialMaterials);
   const [selectedMaterial, setSelectedMaterial] = useState<any>(initialMaterial);
+  const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
+  const [downloadCount, setDownloadCount] = useState<number>(initialMaterial?.downloadCount || 0);
+
+  // Synchronize guestId and check bookmark status
+  React.useEffect(() => {
+    if (!selectedMaterial?._id) return;
+    setDownloadCount(selectedMaterial.downloadCount || 0);
+
+    let guestId = localStorage.getItem("study_guest_id");
+    if (!guestId) {
+      guestId = `guest_${Math.random().toString(36).substring(2)}`;
+      localStorage.setItem("study_guest_id", guestId);
+    }
+
+    // Check if current material is bookmarked
+    fetch(`/api/study/bookmarks?guestId=${guestId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.bookmarks) {
+          const found = data.bookmarks.some(
+            (b: any) => b.targetId?.toString() === selectedMaterial._id.toString()
+          );
+          setIsBookmarked(found);
+        }
+      })
+      .catch(() => {});
+
+    // Send initial open progress
+    fetch("/api/study/progress", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        materialId: selectedMaterial._id,
+        lastPage: 1,
+        guestId,
+      }),
+    }).catch(() => {});
+  }, [selectedMaterial]);
+
+  const handleBookmarkToggle = async () => {
+    if (!selectedMaterial?._id) return;
+    const guestId = localStorage.getItem("study_guest_id") || "";
+    const nextState = !isBookmarked;
+    setIsBookmarked(nextState);
+
+    try {
+      await fetch("/api/study/bookmarks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          targetId: selectedMaterial._id,
+          targetType: "material",
+          guestId,
+        }),
+      });
+    } catch {
+      setIsBookmarked(!nextState); // Revert on failure
+    }
+  };
+
+  const handleDownload = async () => {
+    if (!selectedMaterial?._id) return;
+    const guestId = localStorage.getItem("study_guest_id") || "";
+    setDownloadCount((prev) => prev + 1);
+
+    try {
+      await fetch("/api/study/downloads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          materialId: selectedMaterial._id,
+          guestId,
+        }),
+      });
+    } catch {
+      // Ignore network error
+    }
+  };
+
+  const handlePageChange = (page: number) => {
+    if (!selectedMaterial?._id) return;
+    const guestId = localStorage.getItem("study_guest_id") || "";
+    const totalPages = selectedMaterial.pageCount || 10;
+    const completed = page >= totalPages;
+
+    // Debounced or direct progress tracking
+    fetch("/api/study/progress", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        materialId: selectedMaterial._id,
+        lastPage: page,
+        completed,
+        guestId,
+      }),
+    }).catch(() => {});
+  };
 
   const getFormattedUrl = (url?: string) => {
     if (!url) return "";
@@ -116,7 +213,11 @@ export default function ChapterViewClient({
             notebookLmUrl={selectedMaterial.notebookLmUrl}
             title={selectedMaterial.title}
             totalPages={selectedMaterial.pageCount || 10}
-            downloadCount={selectedMaterial.downloadCount || 0}
+            downloadCount={downloadCount}
+            isBookmarked={isBookmarked}
+            onBookmarkToggle={handleBookmarkToggle}
+            onDownload={handleDownload}
+            onPageChange={handlePageChange}
           />
 
           {/* NOTEBOOKLM INTERACTIVE AI CARD */}

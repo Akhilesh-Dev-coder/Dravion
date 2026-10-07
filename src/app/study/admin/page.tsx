@@ -41,8 +41,8 @@ export default async function AdminDashboardPage() {
   const adminLinks = [
     { title: "Semesters", count: semCount, href: "/study/admin/semesters", icon: Layers, color: "text-blue-700", bg: "bg-blue-50" },
     { title: "Subjects", count: subCount, href: "/study/admin/subjects", icon: BookOpen, color: "text-purple-700", bg: "bg-purple-50" },
-    { title: "Chapters", count: chCount, href: "/study/admin/chapters", icon: Layers, color: "text-indigo-700", bg: "bg-indigo-50" },
-    { title: "Study Materials (PDFs)", count: matCount, href: "/study/admin/materials", icon: FileText, color: "text-emerald-700", bg: "bg-emerald-50" },
+    { title: "Modules", count: chCount, href: "/study/admin/chapters", icon: Layers, color: "text-indigo-700", bg: "bg-indigo-50" },
+    { title: "Module PDFs (1 PDF / Module)", count: matCount, href: "/study/admin/materials", icon: FileText, color: "text-emerald-700", bg: "bg-emerald-50" },
     { title: "Exam Questions", count: qCount, href: "/study/admin/questions", icon: HelpCircle, color: "text-amber-700", bg: "bg-amber-50" },
     { title: "Practice MCQs", count: mcqCount, href: "/study/admin/mcqs", icon: Award, color: "text-rose-700", bg: "bg-rose-50" },
   ];

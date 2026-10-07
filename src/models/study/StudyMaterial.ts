@@ -27,7 +27,7 @@ const StudyMaterialSchema = new Schema<IStudyMaterial>(
   {
     title: { type: String, required: true, trim: true },
     description: { type: String },
-    chapterId: { type: Schema.Types.ObjectId, ref: "Chapter", required: true, index: true },
+    chapterId: { type: Schema.Types.ObjectId, ref: "Chapter", index: true },
     subjectId: { type: Schema.Types.ObjectId, ref: "Subject", required: true, index: true },
     semesterId: { type: Schema.Types.ObjectId, ref: "Semester", required: true, index: true },
     type: {

@@ -108,6 +108,14 @@ export async function uploadStudyFile(
     };
   } catch (diskErr: any) {
     console.error("[Local Disk Write Failed]:", diskErr);
+    
+    // Safety check for base64 payload size limit on serverless hosts
+    if (fileBuffer.length > 10 * 1024 * 1024) {
+      throw new Error(
+        "PDF file is too large (>10MB) for serverless memory storage. Please add CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET to your hosting environment variables."
+      );
+    }
+
     // 3. Ultimate Fallback: Data URI
     const base64Data = fileBuffer.toString("base64");
     return {

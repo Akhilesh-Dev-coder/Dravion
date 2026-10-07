@@ -6,6 +6,7 @@ import Bookmark from "@/models/study/Bookmark";
 import StudyMaterial from "@/models/study/StudyMaterial";
 import Subject from "@/models/study/Subject";
 import Chapter from "@/models/study/Chapter";
+import Semester from "@/models/study/Semester";
 
 export async function GET(request: Request) {
   try {

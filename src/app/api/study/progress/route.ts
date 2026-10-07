@@ -4,6 +4,9 @@ import { authOptions } from "@/lib/auth";
 import dbConnect from "@/lib/mongodb";
 import Progress from "@/models/study/Progress";
 import StudyMaterial from "@/models/study/StudyMaterial";
+import Semester from "@/models/study/Semester";
+import Subject from "@/models/study/Subject";
+import Chapter from "@/models/study/Chapter";
 
 export async function GET(request: Request) {
   try {
