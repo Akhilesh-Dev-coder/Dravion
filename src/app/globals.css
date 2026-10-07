@@ -86,19 +86,23 @@ body {
   background: #3b4252;
 }
 
-/* Glassmorphism Styles */
+/* Optimized Card & Panel Styles */
 .glass-panel {
-  background: rgba(24, 27, 33, 0.7);
+  background: rgba(24, 27, 33, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+nav.glass-panel,
+.glass-panel-blur {
+  background: rgba(24, 27, 33, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glass-panel-premium {
-  background: rgba(30, 34, 42, 0.9);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(30, 34, 42, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
 }
 

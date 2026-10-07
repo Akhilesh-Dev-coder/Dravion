@@ -87,16 +87,21 @@ export default function PublicCardClient({ card }: { card: ICardData }) {
     logPageView();
   }, [card._id, searchParams]);
 
-  const handleLinkClick = async (type: "whatsapp" | "phone" | "email" | "website" | "social_click") => {
+  const handleLinkClick = (type: "whatsapp" | "phone" | "email" | "website" | "social_click") => {
     try {
-      await fetch("/api/analytics", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          cardId: card._id,
-          eventType: type
-        })
-      });
+      if (typeof navigator !== "undefined" && navigator.sendBeacon) {
+        const blob = new Blob([JSON.stringify({ cardId: card._id, eventType: type })], { type: "application/json" });
+        navigator.sendBeacon("/api/analytics", blob);
+      } else {
+        fetch("/api/analytics", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            cardId: card._id,
+            eventType: type
+          })
+        }).catch((err) => console.error(`Failed to log ${type} click analytics:`, err));
+      }
     } catch (err) {
       console.error(`Failed to log ${type} click analytics:`, err);
     }

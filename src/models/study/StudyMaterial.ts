@@ -50,9 +50,5 @@ const StudyMaterialSchema = new Schema<IStudyMaterial>(
   { timestamps: true }
 );
 
-if (models && models.StudyMaterial) {
-  delete (models as any).StudyMaterial;
-}
-
-const StudyMaterial = model<IStudyMaterial>("StudyMaterial", StudyMaterialSchema);
+const StudyMaterial = models.StudyMaterial || model<IStudyMaterial>("StudyMaterial", StudyMaterialSchema);
 export default StudyMaterial;

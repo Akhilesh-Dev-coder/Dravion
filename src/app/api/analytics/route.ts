@@ -18,12 +18,6 @@ export async function POST(req: Request) {
 
     await dbConnect();
 
-    // Verify card exists before logging stats
-    const cardExists = await Card.exists({ _id: cardId });
-    if (!cardExists) {
-      return NextResponse.json({ error: "Card does not exist" }, { status: 404 });
-    }
-
     // Insert log entry
     await Analytics.create({
       cardId,

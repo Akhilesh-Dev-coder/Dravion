@@ -6,11 +6,15 @@ import StudyMaterial from "@/models/study/StudyMaterial";
 import Question from "@/models/study/Question";
 import MCQ from "@/models/study/MCQ";
 
+let isSeeded = false;
+
 export async function ensureSeedData() {
+  if (isSeeded) return;
   await dbConnect();
 
   const semesterCount = await Semester.countDocuments();
   if (semesterCount > 0) {
+    isSeeded = true;
     return; // Already seeded
   }
 
@@ -219,4 +223,5 @@ export async function ensureSeedData() {
       published: true,
     },
   ]);
+  isSeeded = true;
 }
