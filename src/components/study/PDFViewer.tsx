@@ -371,118 +371,135 @@ export default function PDFViewer({
       }`}
     >
       {/* Top Toolbar Header */}
-      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2 px-2.5 sm:px-4 py-2 bg-slate-100/90 border-b border-slate-200">
-        {/* Left: Title & Info */}
-        <div className="flex items-center justify-between md:justify-start space-x-2 min-w-0 w-full md:w-auto">
+      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2 px-2 sm:px-4 py-2 bg-slate-100/90 border-b border-slate-200">
+        {/* Left: Title & Focus Action */}
+        <div className="flex items-center justify-between space-x-2 min-w-0 w-full md:w-auto">
           <div className="flex items-center space-x-2 min-w-0">
             <div className="p-1.5 bg-blue-100 text-blue-600 rounded-lg shrink-0 border border-blue-200">
               <FileText className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div className="truncate">
-              <h3 className="text-xs sm:text-sm font-bold text-slate-900 truncate max-w-[170px] sm:max-w-xs">
+              <h3 className="text-xs sm:text-sm font-bold text-slate-900 truncate max-w-[150px] sm:max-w-xs">
                 {title}
               </h3>
               <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">
-                Page <strong className="text-slate-800">{currentPage}</strong> of {totalPages || "?"} • {downloadCount} downloads
+                P.{currentPage} of {totalPages || "?"}
               </p>
             </div>
           </div>
 
-          {/* View Mode Toggle (Mobile) */}
-          {isMobile && (
-            <div className="flex items-center space-x-1 bg-white border border-slate-200 rounded-lg p-0.5 text-xs shrink-0 shadow-sm">
-              <button
-                onClick={() => setMobileViewMode("scroll")}
-                className={`px-2 py-1 rounded text-[10px] font-bold transition-all cursor-pointer ${
-                  mobileViewMode === "scroll"
-                    ? "bg-blue-600 text-white shadow-sm"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                Scroll
-              </button>
-              <button
-                onClick={() => setMobileViewMode("swipe")}
-                className={`px-2 py-1 rounded text-[10px] font-bold transition-all cursor-pointer ${
-                  mobileViewMode === "swipe"
-                    ? "bg-blue-600 text-white shadow-sm"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                Flip
-              </button>
-            </div>
-          )}
+          {/* Focus button on Mobile right header */}
+          <div className="flex items-center space-x-1.5 md:hidden">
+            <a
+              href={proxyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-1 bg-blue-600 text-white font-bold text-xs px-2.5 py-1.5 rounded-lg shadow-sm"
+              title="Focus View"
+            >
+              <Eye className="w-3.5 h-3.5" />
+              <span>Focus</span>
+            </a>
+          </div>
         </div>
 
         {/* Center & Right Controls */}
         <div className="flex flex-wrap items-center justify-between md:justify-end gap-1.5 sm:gap-2 w-full md:w-auto">
           {/* Page Controls & Zoom */}
-          <div className="flex items-center space-x-1 bg-white border border-slate-200 rounded-lg p-1 text-xs shrink-0 shadow-sm">
-            <button
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage <= 1 || loading}
-              className="p-1 hover:bg-slate-100 rounded text-slate-700 disabled:opacity-30 cursor-pointer"
-              title="Previous Page"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-            <div className="flex items-center space-x-1 px-1 text-xs">
-              <input
-                type="number"
-                min={1}
-                max={totalPages}
-                value={currentPage}
-                onChange={(e) => handlePageChange(parseInt(e.target.value) || 1)}
-                className="w-8 text-center bg-slate-50 border border-slate-300 rounded text-slate-900 py-0.5 text-xs focus:outline-none focus:border-blue-500 font-semibold"
-              />
-              <span className="text-slate-500">/ {totalPages}</span>
+          <div className="flex items-center space-x-1 bg-white border border-slate-200 rounded-lg p-1 text-xs shrink-0 shadow-sm w-full sm:w-auto justify-between sm:justify-start">
+            <div className="flex items-center space-x-0.5">
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage <= 1 || loading}
+                className="p-1 hover:bg-slate-100 rounded text-slate-700 disabled:opacity-30 cursor-pointer"
+                title="Previous Page"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <div className="flex items-center space-x-0.5 text-xs">
+                <input
+                  type="number"
+                  min={1}
+                  max={totalPages}
+                  value={currentPage}
+                  onChange={(e) => handlePageChange(parseInt(e.target.value) || 1)}
+                  className="w-7 text-center bg-slate-50 border border-slate-300 rounded text-slate-900 py-0.5 text-xs focus:outline-none focus:border-blue-500 font-semibold"
+                />
+                <span className="text-slate-500 text-[11px]">/{totalPages}</span>
+              </div>
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage >= totalPages || loading}
+                className="p-1 hover:bg-slate-100 rounded text-slate-700 disabled:opacity-30 cursor-pointer"
+                title="Next Page"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
             </div>
-            <button
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage >= totalPages || loading}
-              className="p-1 hover:bg-slate-100 rounded text-slate-700 disabled:opacity-30 cursor-pointer"
-              title="Next Page"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
 
             <div className="h-4 w-px bg-slate-200 mx-1" />
 
-            <button
-              onClick={() => setScale(Math.max(0.5, scale - 0.15))}
-              disabled={loading}
-              className="p-1 hover:bg-slate-100 rounded text-slate-700 disabled:opacity-30 cursor-pointer"
-              title="Zoom Out"
-            >
-              <ZoomOut className="w-4 h-4" />
-            </button>
-            <button
-              onClick={resetToFitWidth}
-              disabled={loading}
-              className="text-slate-700 font-mono text-xs font-semibold px-1 hover:text-slate-900 cursor-pointer"
-              title="Fit Width"
-            >
-              {Math.round(scale * 100)}%
-            </button>
-            <button
-              onClick={() => setScale(Math.min(2.5, scale + 0.15))}
-              disabled={loading}
-              className="p-1 hover:bg-slate-100 rounded text-slate-700 disabled:opacity-30 cursor-pointer"
-              title="Zoom In"
-            >
-              <ZoomIn className="w-4 h-4" />
-            </button>
+            {/* View Mode Toggle (Scroll / Flip) */}
+            {isMobile && (
+              <div className="flex items-center space-x-0.5 bg-slate-100 rounded-md p-0.5 text-[10px]">
+                <button
+                  onClick={() => setMobileViewMode("scroll")}
+                  className={`px-1.5 py-0.5 rounded font-bold transition-all cursor-pointer ${
+                    mobileViewMode === "scroll"
+                      ? "bg-blue-600 text-white shadow-xs"
+                      : "text-slate-600 hover:text-slate-900"
+                  }`}
+                >
+                  Scroll
+                </button>
+                <button
+                  onClick={() => setMobileViewMode("swipe")}
+                  className={`px-1.5 py-0.5 rounded font-bold transition-all cursor-pointer ${
+                    mobileViewMode === "swipe"
+                      ? "bg-blue-600 text-white shadow-xs"
+                      : "text-slate-600 hover:text-slate-900"
+                  }`}
+                >
+                  Flip
+                </button>
+              </div>
+            )}
+
+            <div className="flex items-center space-x-0.5">
+              <button
+                onClick={() => setScale(Math.max(0.5, scale - 0.15))}
+                disabled={loading}
+                className="p-1 hover:bg-slate-100 rounded text-slate-700 disabled:opacity-30 cursor-pointer"
+                title="Zoom Out"
+              >
+                <ZoomOut className="w-3.5 h-3.5" />
+              </button>
+              <button
+                onClick={resetToFitWidth}
+                disabled={loading}
+                className="text-slate-700 font-mono text-[11px] font-semibold px-0.5 hover:text-slate-900 cursor-pointer"
+                title="Fit Width"
+              >
+                {Math.round(scale * 100)}%
+              </button>
+              <button
+                onClick={() => setScale(Math.min(2.5, scale + 0.15))}
+                disabled={loading}
+                className="p-1 hover:bg-slate-100 rounded text-slate-700 disabled:opacity-30 cursor-pointer"
+                title="Zoom In"
+              >
+                <ZoomIn className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </div>
 
-          {/* Action Buttons */}
+          {/* Action Buttons (Desktop / Tablet) */}
           <div className="flex items-center space-x-1.5 shrink-0">
-            {/* Focus Mode Button */}
             <a
               href={proxyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 text-xs font-bold px-2.5 sm:px-3 py-1.5 rounded-lg transition-all cursor-pointer shadow-xs"
+              className="hidden md:flex items-center space-x-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 text-xs font-bold px-2.5 sm:px-3 py-1.5 rounded-lg transition-all cursor-pointer shadow-xs"
               title="Open Direct PDF in Focus View"
             >
               <Eye className="w-3.5 h-3.5 text-blue-600" />
@@ -513,21 +530,11 @@ export default function PDFViewer({
 
             <a
               href={proxyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-1.5 sm:p-2 bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 rounded-lg transition-colors cursor-pointer"
-              title="Open Direct PDF"
-            >
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
-
-            <a
-              href={proxyUrl}
               download
               target="_blank"
               rel="noopener noreferrer"
               onClick={onDownload}
-              className="flex items-center space-x-1 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-2.5 sm:px-3.5 py-1.5 rounded-lg transition-all shadow-md shadow-blue-500/20 cursor-pointer"
+              className="flex items-center space-x-1 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-2 sm:px-3 py-1.5 rounded-lg transition-all shadow-md shadow-blue-500/20 cursor-pointer"
             >
               <Download className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Download</span>
@@ -542,7 +549,7 @@ export default function PDFViewer({
                   href={formattedUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-1 bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold px-2.5 sm:px-3.5 py-1.5 rounded-lg transition-all shadow-md shadow-purple-500/20 cursor-pointer"
+                  className="flex items-center space-x-1 bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold px-2 sm:px-3 py-1.5 rounded-lg transition-all shadow-md shadow-purple-500/20 cursor-pointer"
                   title="Open in Google NotebookLM"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-amber-300" />

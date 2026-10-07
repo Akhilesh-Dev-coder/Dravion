@@ -107,6 +107,7 @@ export default function ChapterViewClient({
       )}
 
       {/* PDF VIEWER SECTION */}
+      <AdSlot position="pdf-top" />
       {selectedMaterial ? (
         <section className="space-y-4 w-full overflow-hidden">
           <PDFViewer
@@ -191,6 +192,8 @@ export default function ChapterViewClient({
           </div>
         </section>
       )}
+
+      <AdSlot position="mobile-banner" />
     </div>
   );
 }

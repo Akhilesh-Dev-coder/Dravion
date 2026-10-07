@@ -51,42 +51,42 @@ export default async function StudyLandingPage() {
     ]);
 
   return (
-    <div className="min-h-screen pb-16 space-y-10 bg-slate-50 text-slate-900">
+    <div className="min-h-screen pb-12 space-y-6 sm:space-y-10 bg-slate-50 text-slate-900">
       {/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-blue-50 via-white to-slate-50 pt-12 pb-16 px-4 sm:px-6 lg:px-8 border-b border-slate-200">
+      <section className="relative overflow-hidden bg-gradient-to-b from-blue-50 via-white to-slate-50 pt-6 sm:pt-12 pb-8 sm:pb-14 px-3 sm:px-6 lg:px-8 border-b border-slate-200">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-blue-400/10 blur-[120px] pointer-events-none rounded-full" />
 
-        <div className="max-w-4xl mx-auto text-center space-y-6 relative z-10">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-blue-100 border border-blue-200 text-blue-700 text-xs font-bold tracking-wide">
+        <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6 relative z-10">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-100 border border-blue-200 text-blue-700 text-xs font-bold tracking-wide">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Semester Exam Study Platform</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
             Dravion <span className="text-blue-600">Study</span>
           </h1>
 
-          <p className="text-xl sm:text-2xl font-bold text-slate-700">
+          <p className="text-base sm:text-2xl font-bold text-slate-700">
             Study smarter. Prepare better.
           </p>
 
-          <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xs sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed hidden sm:block">
             Notes, previous questions, practice materials and study resources for your semester exams.
           </p>
 
           {/* Search Box */}
-          <div className="pt-2 max-w-2xl mx-auto">
+          <div className="pt-1 max-w-2xl mx-auto">
             <form action="/study/search" method="GET" className="relative group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-blue-600 transition-colors" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-slate-400 group-focus-within:text-blue-600 transition-colors" />
               <input
                 type="text"
                 name="q"
-                placeholder="Search subjects, chapters, notes, questions..."
-                className="w-full pl-12 pr-28 py-4 bg-white border border-slate-300 rounded-2xl text-sm sm:text-base text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 shadow-md transition-all font-medium"
+                placeholder="Search subjects, notes, questions..."
+                className="w-full pl-10 sm:pl-12 pr-24 sm:pr-28 py-3 sm:py-4 bg-white border border-slate-300 rounded-xl sm:rounded-2xl text-xs sm:text-base text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 shadow-sm transition-all font-medium"
               />
               <button
                 type="submit"
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs sm:text-sm px-5 py-2.5 rounded-xl transition-all shadow-md cursor-pointer"
+                className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs sm:text-sm px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-lg sm:rounded-xl transition-all shadow-md cursor-pointer"
               >
                 Search
               </button>
@@ -94,31 +94,31 @@ export default async function StudyLandingPage() {
           </div>
 
           {/* Action CTAs */}
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+          <div className="flex items-center justify-center gap-3 pt-1">
             <Link
               href="/study/semesters"
-              className="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-extrabold px-6 py-3 rounded-xl transition-all shadow-lg shadow-blue-500/20 cursor-pointer"
+              className="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs sm:text-sm px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl transition-all shadow-md shadow-blue-500/20 cursor-pointer"
             >
               <BookOpen className="w-4 h-4" />
               <span>Start Studying</span>
             </Link>
             <Link
               href="/study/semesters"
-              className="inline-flex items-center space-x-2 bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 font-bold px-6 py-3 rounded-xl transition-all shadow-xs cursor-pointer"
+              className="inline-flex items-center space-x-1.5 bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 font-bold text-xs sm:text-sm px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl transition-all shadow-xs cursor-pointer"
             >
-              <span>Browse Subjects</span>
+              <span>Subjects</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 space-y-6 sm:space-y-10">
         {/* Monitization Slot */}
         <AdSlot position="study-home" />
 
         {/* QUICK ACCESS DASHBOARD CARD */}
-        <section className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+        <section className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-8 shadow-xs">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between pb-6 border-b border-slate-200 gap-4">
             <div>
               <h2 className="text-2xl font-extrabold text-slate-900">Welcome back 👋</h2>
@@ -249,6 +249,8 @@ export default async function StudyLandingPage() {
             ))}
           </div>
         </section>
+
+        <AdSlot position="mobile-banner" />
 
         {/* RECENTLY ADDED MATERIALS */}
         {recentMaterials.length > 0 && (
