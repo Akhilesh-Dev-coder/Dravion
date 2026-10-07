@@ -24,7 +24,6 @@ export default async function SemesterDetailsPage({
   }
 
   if (!semester) {
-    // Try matching number
     const num = parseInt(semesterId.replace("semester-", ""));
     if (!isNaN(num)) {
       semester = await Semester.findOne({ number: num, published: true }).lean();
@@ -50,37 +49,37 @@ export default async function SemesterDetailsPage({
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8 bg-slate-50 text-slate-900 min-h-screen">
       {/* Breadcrumbs */}
-      <div className="flex items-center space-x-2 text-xs text-gray-400">
-        <Link href="/study" className="hover:text-white">
+      <div className="flex items-center space-x-2 text-xs text-slate-500 font-medium">
+        <Link href="/study" className="hover:text-blue-600">
           Home
         </Link>
         <span>/</span>
-        <Link href="/study/semesters" className="hover:text-white">
+        <Link href="/study/semesters" className="hover:text-blue-600">
           Semesters
         </Link>
         <span>/</span>
-        <span className="text-white font-semibold">{semester.name}</span>
+        <span className="text-slate-900 font-bold">{semester.name}</span>
       </div>
 
       {/* Semester Header */}
-      <div className="border-b border-white/10 pb-6 space-y-3">
+      <div className="border-b border-slate-200 pb-6 space-y-3">
         <div className="flex items-center space-x-3">
           <Link
             href="/study/semesters"
-            className="p-2 bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 rounded-lg transition-colors"
+            className="p-2 bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 rounded-xl transition-colors shadow-xs"
           >
             <ArrowLeft className="w-4 h-4" />
           </Link>
           <div>
             <div className="flex items-center space-x-2">
-              <span className="text-xs font-bold font-mono px-2.5 py-0.5 rounded bg-blue-600/20 text-blue-400 border border-blue-500/30">
+              <span className="text-xs font-bold font-mono px-2.5 py-0.5 rounded bg-blue-100 text-blue-700 border border-blue-200">
                 SEM {semester.number}
               </span>
-              <h1 className="text-3xl font-extrabold text-white">{semester.name} Subjects</h1>
+              <h1 className="text-3xl font-extrabold text-slate-900">{semester.name} Subjects</h1>
             </div>
-            <p className="text-xs sm:text-sm text-gray-400 mt-1">
+            <p className="text-xs sm:text-sm text-slate-600 mt-1 font-medium">
               {semester.description || "Course modules and subject study materials."}
             </p>
           </div>
@@ -91,10 +90,10 @@ export default async function SemesterDetailsPage({
 
       {/* Subjects Grid */}
       {subjectsWithChapters.length === 0 ? (
-        <div className="p-12 text-center bg-[#141720] border border-white/10 rounded-2xl text-gray-400 space-y-3">
-          <BookOpen className="w-12 h-12 text-gray-600 mx-auto" />
-          <h3 className="text-base font-semibold text-white">No Subjects Added Yet</h3>
-          <p className="text-xs max-w-sm mx-auto">
+        <div className="p-12 text-center bg-white border border-slate-200 rounded-2xl text-slate-500 space-y-3 shadow-sm">
+          <BookOpen className="w-12 h-12 text-slate-400 mx-auto" />
+          <h3 className="text-base font-bold text-slate-900">No Subjects Added Yet</h3>
+          <p className="text-xs max-w-sm mx-auto font-medium">
             Subjects for this semester will be available soon. Check back shortly!
           </p>
         </div>
@@ -103,40 +102,40 @@ export default async function SemesterDetailsPage({
           {subjectsWithChapters.map((sub: any) => (
             <div
               key={sub._id.toString()}
-              className="bg-[#141720] border border-white/10 hover:border-blue-500/40 rounded-2xl p-6 transition-all shadow-xl space-y-4 flex flex-col justify-between"
+              className="bg-white border border-slate-200 hover:border-blue-500 rounded-2xl p-6 transition-all shadow-sm hover:shadow-md space-y-4 flex flex-col justify-between"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono font-bold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2.5 py-1 rounded">
+                  <span className="text-xs font-mono font-bold text-blue-700 bg-blue-100 border border-blue-200 px-2.5 py-1 rounded">
                     {sub.code}
                   </span>
-                  <span className="text-xs text-gray-400">{sub.chapters.length} Chapters</span>
+                  <span className="text-xs text-slate-500 font-bold">{sub.chapters.length} Chapters</span>
                 </div>
 
-                <h2 className="text-xl font-bold text-white">{sub.name}</h2>
-                <p className="text-xs text-gray-400 leading-relaxed">
+                <h2 className="text-xl font-extrabold text-slate-900">{sub.name}</h2>
+                <p className="text-xs text-slate-600 leading-relaxed font-medium">
                   {sub.description || "Chapter notes, solved papers, and MCQs."}
                 </p>
 
                 {/* Chapter List Preview */}
                 {sub.chapters.length > 0 && (
-                  <div className="space-y-1.5 pt-2 border-t border-white/5">
-                    <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block mb-1">
+                  <div className="space-y-1.5 pt-2 border-t border-slate-100">
+                    <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
                       Chapters:
                     </span>
                     {sub.chapters.slice(0, 3).map((ch: any) => (
                       <div
                         key={ch._id.toString()}
-                        className="flex items-center justify-between text-xs text-gray-300 bg-white/5 px-3 py-1.5 rounded-lg border border-white/5"
+                        className="flex items-center justify-between text-xs text-slate-700 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200 font-medium"
                       >
                         <span className="truncate">
                           Ch {ch.chapterNumber}: {ch.name}
                         </span>
-                        <ChevronRight className="w-3.5 h-3.5 text-gray-500 shrink-0" />
+                        <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                       </div>
                     ))}
                     {sub.chapters.length > 3 && (
-                      <p className="text-[11px] text-blue-400 pl-1">
+                      <p className="text-[11px] text-blue-600 font-bold pl-1">
                         + {sub.chapters.length - 3} more chapters
                       </p>
                     )}
@@ -144,10 +143,10 @@ export default async function SemesterDetailsPage({
                 )}
               </div>
 
-              <div className="pt-4 border-t border-white/10">
+              <div className="pt-4 border-t border-slate-100">
                 <Link
                   href={`/study/semester/${semester.slug || semester._id}/${sub.slug || sub._id}`}
-                  className="w-full inline-flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs py-2.5 rounded-xl transition-all shadow-md cursor-pointer"
+                  className="w-full inline-flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs py-3 rounded-xl transition-all shadow-md shadow-blue-500/20 cursor-pointer"
                 >
                   <span>Open {sub.name}</span>
                   <ChevronRight className="w-4 h-4" />
