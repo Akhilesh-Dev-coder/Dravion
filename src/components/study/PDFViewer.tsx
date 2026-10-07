@@ -63,6 +63,7 @@ export default function PDFViewer({
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [mobileViewMode, setMobileViewMode] = useState<"embed" | "swipe">("embed");
 
   // Touch Swipe Gesture State (Mobile)
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
