@@ -21,6 +21,7 @@ import {
   BookOpen,
   ArrowLeftRight,
   Sparkles,
+  Eye,
 } from "lucide-react";
 
 interface PDFViewerProps {
@@ -476,6 +477,18 @@ export default function PDFViewer({
 
           {/* Action Buttons */}
           <div className="flex items-center space-x-1.5 shrink-0">
+            {/* Focus Mode Button */}
+            <a
+              href={proxyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 text-xs font-bold px-2.5 sm:px-3 py-1.5 rounded-lg transition-all cursor-pointer shadow-xs"
+              title="Open Direct PDF in Focus View"
+            >
+              <Eye className="w-3.5 h-3.5 text-blue-600" />
+              <span>Focus</span>
+            </a>
+
             {onBookmarkToggle && (
               <button
                 onClick={onBookmarkToggle}
