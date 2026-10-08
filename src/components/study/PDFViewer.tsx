@@ -65,6 +65,8 @@ export default function PDFViewer({
   const [copied, setCopied] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [mobileViewMode, setMobileViewMode] = useState<"scroll" | "swipe">("scroll");
+  const [downloadState, setDownloadState] = useState<"idle" | "downloading" | "completed">("idle");
+  const [showToast, setShowToast] = useState<boolean>(false);
 
   // Touch Swipe Gesture State (Mobile Swipe Mode)
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
@@ -363,6 +365,56 @@ export default function PDFViewer({
     }
   };
 
+  const handleDownloadClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (downloadState === "downloading") return;
+
+    try {
+      setDownloadState("downloading");
+      if (onDownload) onDownload();
+
+      const response = await fetch(proxyUrl);
+      if (!response.ok) throw new Error("Download failed");
+      const blob = await response.blob();
+
+      const blobUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      const cleanTitle = title.replace(/[^a-zA-Z0-9_\-]/g, "_");
+      link.download = `${cleanTitle}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(blobUrl);
+
+      setDownloadState("completed");
+      setShowToast(true);
+
+      setTimeout(() => {
+        setDownloadState("idle");
+      }, 3000);
+
+      setTimeout(() => {
+        setShowToast(false);
+      }, 4500);
+    } catch (err) {
+      console.error("Download error:", err);
+      const link = document.createElement("a");
+      link.href = proxyUrl;
+      link.download = `${title}.pdf`;
+      link.target = "_blank";
+      link.click();
+
+      setDownloadState("completed");
+      setShowToast(true);
+
+      setTimeout(() => {
+        setDownloadState("idle");
+        setShowToast(false);
+      }, 3000);
+    }
+  };
+
   return (
     <div
       ref={containerRef}
@@ -528,17 +580,35 @@ export default function PDFViewer({
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Share2 className="w-3.5 h-3.5" />}
             </button>
 
-            <a
-              href={proxyUrl}
-              download
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={onDownload}
-              className="flex items-center space-x-1 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-2 sm:px-3 py-1.5 rounded-lg transition-all shadow-md shadow-blue-500/20 cursor-pointer"
+            <button
+              onClick={handleDownloadClick}
+              disabled={downloadState === "downloading"}
+              className={`flex items-center space-x-1.5 text-xs font-semibold px-2.5 sm:px-3 py-1.5 rounded-lg transition-all shadow-md cursor-pointer ${
+                downloadState === "downloading"
+                  ? "bg-blue-500 text-white opacity-90 cursor-not-allowed shadow-none"
+                  : downloadState === "completed"
+                  ? "bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-500/20"
+                  : "bg-blue-600 hover:bg-blue-700 text-white shadow-blue-500/20"
+              }`}
+              title="Download PDF Document"
             >
-              <Download className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Download</span>
-            </a>
+              {downloadState === "downloading" ? (
+                <>
+                  <Loader2 className="w-3.5 h-3.5 animate-spin text-white" />
+                  <span>Downloading...</span>
+                </>
+              ) : downloadState === "completed" ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-white" />
+                  <span>Downloaded!</span>
+                </>
+              ) : (
+                <>
+                  <Download className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Download</span>
+                </>
+              )}
+            </button>
 
             {notebookLmUrl && (() => {
               const formattedUrl = /^https?:\/\//i.test(notebookLmUrl.trim())
@@ -679,6 +749,21 @@ export default function PDFViewer({
           <ExternalLink className="w-3.5 h-3.5" />
         </a>
       </div>
+
+      {/* FLOATING DOWNLOAD SUCCESS TOAST */}
+      {showToast && (
+        <div className="fixed bottom-6 right-6 z-50 flex items-center space-x-3 bg-slate-900/95 text-white px-4 py-3 rounded-xl shadow-2xl border border-slate-700 backdrop-blur-md animate-in fade-in slide-in-from-bottom-5 duration-300">
+          <div className="p-1.5 bg-emerald-500 rounded-full text-slate-950 shrink-0">
+            <Check className="w-4 h-4 stroke-[3]" />
+          </div>
+          <div className="text-left pr-2">
+            <p className="text-xs font-bold text-white">Download Started!</p>
+            <p className="text-[11px] text-slate-300 font-medium max-w-xs truncate">
+              "{title}" is saved to your device.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
