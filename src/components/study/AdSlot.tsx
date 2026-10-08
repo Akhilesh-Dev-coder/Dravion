@@ -20,24 +20,28 @@ export default function AdSlot({
   adSlotId = process.env.NEXT_PUBLIC_ADSENSE_SLOT || "9466776499",
 }: AdSlotProps) {
   useEffect(() => {
-    try {
-      if (typeof window !== "undefined" && adClient && adSlotId) {
-        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+    const timer = setTimeout(() => {
+      try {
+        if (typeof window !== "undefined" && adClient && adSlotId) {
+          ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+        }
+      } catch {
+        // Ignore adsbygoogle duplicate push errors
       }
-    } catch {
-      // Ignore adsbygoogle duplicate push errors
-    }
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, [adClient, adSlotId]);
 
   if (adClient && adSlotId) {
     return (
       <div
         data-ad-position={position}
-        className={`w-full flex justify-center items-center my-4 overflow-hidden ${className}`}
+        className={`w-full flex justify-center items-center my-4 overflow-hidden min-h-[90px] ${className}`}
       >
         <ins
           className="adsbygoogle"
-          style={{ display: "block", width: "100%" }}
+          style={{ display: "block", width: "100%", minHeight: "90px" }}
           data-ad-client={adClient}
           data-ad-slot={adSlotId}
           data-ad-format="auto"
