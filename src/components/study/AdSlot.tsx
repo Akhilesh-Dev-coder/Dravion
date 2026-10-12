@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
 interface AdSlotProps {
   position: "study-home" | "subject-page" | "chapter-page" | "dashboard" | "pdf-bottom" | "pdf-top" | "mobile-banner";
@@ -10,8 +10,8 @@ interface AdSlotProps {
 }
 
 /**
- * Reusable monetization & advertisement slot component for Dravion Study.
- * Formatted for optimal visibility on both mobile devices and laptop screens.
+ * Official Google AdSense Ad Unit for Dravion Study.
+ * Configured with publisher ca-pub-1988525992738589 and slot 9466776499.
  */
 export default function AdSlot({
   position,
@@ -19,51 +19,35 @@ export default function AdSlot({
   adClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT || "ca-pub-1988525992738589",
   adSlotId = process.env.NEXT_PUBLIC_ADSENSE_SLOT || "9466776499",
 }: AdSlotProps) {
+  const adPushed = useRef<boolean>(false);
+
   useEffect(() => {
-    const timer = setTimeout(() => {
-      try {
-        if (typeof window !== "undefined" && adClient && adSlotId) {
-          ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
-        }
-      } catch {
-        // Ignore adsbygoogle duplicate push errors
+    if (adPushed.current) return;
+
+    try {
+      if (typeof window !== "undefined") {
+        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+        adPushed.current = true;
       }
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, [adClient, adSlotId]);
-
-  if (adClient && adSlotId) {
-    return (
-      <div
-        data-ad-position={position}
-        className={`w-full flex justify-center items-center my-4 overflow-hidden min-h-[90px] ${className}`}
-      >
-        <ins
-          className="adsbygoogle"
-          style={{ display: "block", width: "100%", minHeight: "90px" }}
-          data-ad-client={adClient}
-          data-ad-slot={adSlotId}
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        />
-      </div>
-    );
-  }
+    } catch (err) {
+      console.warn("[AdSense Error]:", err);
+    }
+  }, []);
 
   return (
     <div
       data-ad-position={position}
-      className={`w-full bg-slate-100/90 border border-dashed border-slate-300 rounded-xl p-3 sm:p-4 text-center my-4 select-none shadow-xs transition-all ${className}`}
+      className={`w-full flex justify-center items-center my-4 overflow-hidden min-h-[90px] ${className}`}
     >
-      <div className="flex flex-col items-center justify-center space-y-1">
-        <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 bg-slate-200/80 border border-slate-300 px-2.5 py-0.5 rounded-full">
-          ADVERTISEMENT SPACE • MOBILE & DESKTOP
-        </span>
-        <p className="text-xs font-semibold text-slate-600">
-          Ad Slot ({position}) — Ready for Google AdSense / Sponsor Banners
-        </p>
-      </div>
+      <ins
+        className="adsbygoogle"
+        style={{ display: "block", width: "100%", minHeight: "90px" }}
+        data-ad-client={adClient}
+        data-ad-slot={adSlotId}
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      />
     </div>
   );
 }
+
