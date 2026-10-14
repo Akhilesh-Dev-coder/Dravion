@@ -53,7 +53,7 @@ export default async function StudyLandingPage() {
   return (
     <div className="min-h-screen pb-12 space-y-6 sm:space-y-10 bg-slate-50 text-slate-900">
       {/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-blue-50 via-white to-slate-50 pt-6 sm:pt-12 pb-8 sm:pb-14 px-3 sm:px-6 lg:px-8 border-b border-slate-200">
+      <section className="relative overflow-hidden bg-gradient-to-b from-blue-50 via-white to-slate-50 pt-8 sm:pt-14 pb-10 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-slate-200">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-blue-400/10 blur-[120px] pointer-events-none rounded-full" />
 
         <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6 relative z-10">
@@ -62,7 +62,7 @@ export default async function StudyLandingPage() {
             <span>Semester Exam Study Platform</span>
           </div>
 
-          <h1 className="text-3xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
             Dravion <span className="text-blue-600">Study</span>
           </h1>
 
@@ -75,18 +75,18 @@ export default async function StudyLandingPage() {
           </p>
 
           {/* Search Box */}
-          <div className="pt-1 max-w-2xl mx-auto">
+          <div className="pt-1 max-w-2xl mx-auto w-full">
             <form action="/study/search" method="GET" className="relative group">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-slate-400 group-focus-within:text-blue-600 transition-colors" />
               <input
                 type="text"
                 name="q"
                 placeholder="Search subjects, notes, questions..."
-                className="w-full pl-10 sm:pl-12 pr-24 sm:pr-28 py-3 sm:py-4 bg-white border border-slate-300 rounded-xl sm:rounded-2xl text-xs sm:text-base text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 shadow-sm transition-all font-medium"
+                className="w-full pl-9 sm:pl-12 pr-20 sm:pr-28 py-3 sm:py-3.5 bg-white border border-slate-300 rounded-xl sm:rounded-2xl text-xs sm:text-sm md:text-base text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 shadow-sm transition-all font-medium"
               />
               <button
                 type="submit"
-                className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs sm:text-sm px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-lg sm:rounded-xl transition-all shadow-md cursor-pointer"
+                className="absolute right-1 sm:right-1.5 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs sm:text-sm px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-lg sm:rounded-xl transition-all shadow-md cursor-pointer"
               >
                 Search
               </button>
@@ -94,7 +94,7 @@ export default async function StudyLandingPage() {
           </div>
 
           {/* Action CTAs */}
-          <div className="flex items-center justify-center gap-3 pt-1">
+          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 pt-1">
             <Link
               href="/study/semesters"
               className="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs sm:text-sm px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl transition-all shadow-md shadow-blue-500/20 cursor-pointer"
@@ -113,13 +113,13 @@ export default async function StudyLandingPage() {
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 space-y-6 sm:space-y-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-10">
         {/* Monitization Slot */}
         <AdSlot position="study-home" />
 
         {/* QUICK ACCESS DASHBOARD CARD */}
-        <section className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-8 shadow-xs">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between pb-6 border-b border-slate-200 gap-4">
+        <section className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 md:p-8 shadow-xs">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-slate-200 gap-4">
             <div>
               <h2 className="text-2xl font-extrabold text-slate-900">Welcome back 👋</h2>
               <p className="text-xs sm:text-sm text-slate-600 mt-1 font-medium">

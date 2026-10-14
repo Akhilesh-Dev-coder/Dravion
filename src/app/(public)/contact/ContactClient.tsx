@@ -67,25 +67,25 @@ export default function ContactClient() {
   };
 
   return (
-    <div className="relative min-h-screen bg-grid-pattern py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <div className="relative min-h-screen bg-grid-pattern py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background Orbs */}
-      <div className="absolute top-10 left-10 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-secondary/5 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-10 w-72 sm:w-96 h-72 sm:h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-10 right-0 md:right-10 w-72 sm:w-96 h-72 sm:h-96 bg-secondary/5 rounded-full blur-[100px] pointer-events-none"></div>
 
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 sm:mb-16">
           <span className="text-xs font-bold uppercase tracking-wider text-primary">Inquiry</span>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-white mt-2 tracking-tight">Start a Project</h1>
-          <p className="text-gray-400 mt-4 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white mt-2 tracking-tight">Start a Project</h1>
+          <p className="text-gray-400 mt-3 sm:mt-4 text-xs sm:text-sm md:text-base max-w-xl mx-auto leading-relaxed">
             Have a custom web development or SaaS project in mind? Fill out the form below and we will get back to you within 24 hours.
           </p>
         </div>
 
         {/* Contact Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-stretch">
           {/* Text/Info */}
-          <div className="md:col-span-4 flex flex-col justify-between glass-panel p-8 rounded-2xl border border-white/5 space-y-6">
+          <div className="md:col-span-5 lg:col-span-4 flex flex-col justify-between glass-panel p-6 sm:p-8 rounded-2xl border border-white/5 space-y-6">
             <div className="space-y-4">
               <h2 className="text-lg font-bold text-white">Get in touch</h2>
               <p className="text-xs text-gray-400 leading-relaxed">
@@ -96,7 +96,7 @@ export default function ContactClient() {
             <div className="space-y-4 text-xs">
               <div className="flex items-center space-x-3 text-gray-300">
                 <Mail className="w-4 h-4 text-primary shrink-0" />
-                <a href="mailto:dravion456@gmail.com" className="hover:underline">dravion456@gmail.com</a>
+                <a href="mailto:dravion456@gmail.com" className="hover:underline truncate">dravion456@gmail.com</a>
               </div>
               <div className="flex items-center space-x-3 text-gray-300">
                 <InstagramIcon className="w-4 h-4 text-secondary shrink-0" />
@@ -118,7 +118,7 @@ export default function ContactClient() {
           </div>
 
           {/* Form Card */}
-          <div className="md:col-span-8 glass-panel-premium p-8 rounded-2xl border border-white/5">
+          <div className="md:col-span-7 lg:col-span-8 glass-panel-premium p-6 sm:p-8 rounded-2xl border border-white/5">
             {success ? (
               <div className="text-center py-12 space-y-4">
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 mb-2">

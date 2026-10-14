@@ -46,21 +46,21 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="relative overflow-hidden bg-grid-pattern pb-20">
+    <div className="relative overflow-hidden bg-grid-pattern pb-16 sm:pb-24">
       {/* Background Orbs */}
-      <div className="absolute top-10 left-10 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute top-40 right-10 w-[400px] h-[400px] bg-secondary/10 rounded-full blur-[130px] pointer-events-none"></div>
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-10 w-72 sm:w-96 h-72 sm:h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute top-48 right-0 md:right-10 w-72 sm:w-96 h-72 sm:h-96 bg-secondary/10 rounded-full blur-[110px] pointer-events-none"></div>
 
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-28 text-center relative z-10">
-        <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight leading-none mb-6">
-          Building Digital Experiences <br />
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-20 md:pt-28 text-center relative z-10">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.15] mb-5 sm:mb-6 text-balance max-w-5xl mx-auto">
+          Building Digital Experiences <br className="hidden lg:inline" />
           <span className="text-gradient-primary">That Grow Businesses.</span>
         </h1>
-        <p className="max-w-2xl mx-auto text-gray-400 text-base md:text-lg mb-8 leading-relaxed">
-          Dravion is a modern technology studio and software studio. We design high-performance web systems, custom SaaS suites, and AI automations, and host the world's most elegant digital business cards.
+        <p className="max-w-2xl mx-auto text-gray-400 text-sm sm:text-base md:text-lg mb-8 leading-relaxed px-2">
+          Dravion is a modern technology and software studio. We design high-performance web systems, custom SaaS suites, and AI automations, and host the world&apos;s most elegant digital business cards.
         </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-md mx-auto sm:max-w-none">
           <Link
             href="/contact"
             className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-gradient-to-r from-primary to-accent hover:opacity-95 text-white font-semibold px-6 py-3 rounded-lg text-sm transition-all shadow-lg shadow-primary/25 cursor-pointer"
@@ -68,79 +68,88 @@ export default function HomePage() {
             <span>Start a Project</span>
             <ArrowUpRight className="w-4 h-4" />
           </Link>
+          <Link
+            href="/digital-card"
+            className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 px-6 py-3 rounded-lg text-sm font-semibold transition-all cursor-pointer"
+          >
+            <span>Digital Business Cards</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </section>
 
       {/* Services Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-28 md:mt-40 relative z-10">
-        <div className="text-center mb-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 sm:mt-28 md:mt-36 relative z-10">
+        <div className="text-center mb-12 sm:mb-16">
           <span className="text-xs font-bold uppercase tracking-wider text-primary">Core Services</span>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mt-2">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mt-2">
             What We Do Best.
           </h2>
-          <p className="text-gray-400 mt-4 text-sm max-w-xl mx-auto">
+          <p className="text-gray-400 mt-3 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
             From architecture to deployment, we build top-tier software experiences tailored to your business needs.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {services.map((srv, idx) => (
-            <div key={idx} className="glass-panel p-6 rounded-2xl hover:border-primary/30 transition-all group hover:-translate-y-1">
-              <div className="w-12 h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
-                {srv.icon}
+            <div key={idx} className="glass-panel p-6 rounded-2xl hover:border-primary/30 transition-all group hover:-translate-y-1 flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
+                  {srv.icon}
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-2">{srv.title}</h3>
+                <p className="text-sm text-gray-400 leading-relaxed">{srv.desc}</p>
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">{srv.title}</h3>
-              <p className="text-sm text-gray-400 leading-relaxed">{srv.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Why Choose Dravion Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-28 md:mt-40 relative z-10">
-        <div className="text-center mb-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 sm:mt-28 md:mt-36 relative z-10">
+        <div className="text-center mb-12 sm:mb-16">
           <span className="text-xs font-bold uppercase tracking-wider text-secondary">The Dravion Difference</span>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mt-2">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mt-2">
             Why Choose Us.
           </h2>
-          <p className="text-gray-400 mt-4 text-sm max-w-xl mx-auto">
+          <p className="text-gray-400 mt-3 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
             We merge premium web aesthetics with robust, modern software architecture.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="glass-panel p-8 rounded-2xl border border-white/5 space-y-4">
-            <h3 className="text-lg font-bold text-white flex items-center">
-              <span className="w-2 h-2 rounded-full bg-primary mr-2.5"></span> Sub-second Load Times
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/5 space-y-3 sm:space-y-4">
+            <h3 className="text-base sm:text-lg font-bold text-white flex items-center">
+              <span className="w-2 h-2 rounded-full bg-primary mr-2.5 shrink-0"></span> Sub-second Load Times
             </h3>
-            <p className="text-sm text-gray-400 leading-relaxed">
+            <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
               We compile layouts with Next.js Turbopack and pre-render content statically to ensure pages load instantly (under 200ms) on both mobile and desktop.
             </p>
           </div>
 
-          <div className="glass-panel p-8 rounded-2xl border border-white/5 space-y-4">
-            <h3 className="text-lg font-bold text-white flex items-center">
-              <span className="w-2 h-2 rounded-full bg-secondary mr-2.5"></span> Premium Visual Design
+          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/5 space-y-3 sm:space-y-4">
+            <h3 className="text-base sm:text-lg font-bold text-white flex items-center">
+              <span className="w-2 h-2 rounded-full bg-secondary mr-2.5 shrink-0"></span> Premium Visual Design
             </h3>
-            <p className="text-sm text-gray-400 leading-relaxed">
+            <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
               No boring templates. Every interface is styled with premium glassmorphism layouts, responsive elements, and custom CSS color palettes.
             </p>
           </div>
 
-          <div className="glass-panel p-8 rounded-2xl border border-white/5 space-y-4">
-            <h3 className="text-lg font-bold text-white flex items-center">
-              <span className="w-2 h-2 rounded-full bg-accent mr-2.5"></span> Live Operational Metrics
+          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/5 space-y-3 sm:space-y-4">
+            <h3 className="text-base sm:text-lg font-bold text-white flex items-center">
+              <span className="w-2 h-2 rounded-full bg-accent mr-2.5 shrink-0"></span> Live Operational Metrics
             </h3>
-            <p className="text-sm text-gray-400 leading-relaxed">
+            <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
               Every profile link logs views, QR scans, and WhatsApp clicks in real-time, providing immediate engagement data in your dashboard.
             </p>
           </div>
 
-          <div className="glass-panel p-8 rounded-2xl border border-white/5 space-y-4">
-            <h3 className="text-lg font-bold text-white flex items-center">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 mr-2.5"></span> Robust Data Security
+          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/5 space-y-3 sm:space-y-4">
+            <h3 className="text-base sm:text-lg font-bold text-white flex items-center">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 mr-2.5 shrink-0"></span> Robust Data Security
             </h3>
-            <p className="text-sm text-gray-400 leading-relaxed">
+            <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
               Sessions are guarded with encrypted JWT signatures, passwords are securely hashed, and all API calls prevent payload injection.
             </p>
           </div>
@@ -148,38 +157,38 @@ export default function HomePage() {
       </section>
 
       {/* Setup Steps Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-28 md:mt-40 relative z-10">
-        <div className="text-center mb-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 sm:mt-28 md:mt-36 relative z-10">
+        <div className="text-center mb-12 sm:mb-16">
           <span className="text-xs font-bold uppercase tracking-wider text-accent">Simple Setup</span>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mt-2">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mt-2">
             Get Started in 3 Steps.
           </h2>
-          <p className="text-gray-400 mt-4 text-sm max-w-xl mx-auto">
-            You don't need any technical skills to launch your digital card.
+          <p className="text-gray-400 mt-3 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
+            You don&apos;t need any technical skills to launch your digital card.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="glass-panel p-8 rounded-2xl border border-white/5 space-y-4 text-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/5 space-y-4 text-center">
             <div className="w-10 h-10 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-primary text-sm font-bold mx-auto">1</div>
-            <h3 className="text-lg font-semibold text-white">Create Account</h3>
-            <p className="text-xs text-gray-400 leading-relaxed">
+            <h3 className="text-base sm:text-lg font-semibold text-white">Create Account</h3>
+            <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
               Sign up securely using your Google account or email in under 15 seconds.
             </p>
           </div>
 
-          <div className="glass-panel p-8 rounded-2xl border border-white/5 space-y-4 text-center">
+          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/5 space-y-4 text-center">
             <div className="w-10 h-10 rounded-full bg-secondary/20 border border-secondary/30 flex items-center justify-center text-secondary text-sm font-bold mx-auto">2</div>
-            <h3 className="text-lg font-semibold text-white">Input Details</h3>
-            <p className="text-xs text-gray-400 leading-relaxed">
+            <h3 className="text-base sm:text-lg font-semibold text-white">Input Details</h3>
+            <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
               Fill in your contact links, whatsapp number, socials, and upload a profile picture.
             </p>
           </div>
 
-          <div className="glass-panel p-8 rounded-2xl border border-white/5 space-y-4 text-center">
+          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/5 space-y-4 text-center">
             <div className="w-10 h-10 rounded-full bg-accent/20 border border-accent/30 flex items-center justify-center text-accent text-sm font-bold mx-auto">3</div>
-            <h3 className="text-lg font-semibold text-white">Share & Track</h3>
-            <p className="text-xs text-gray-400 leading-relaxed">
+            <h3 className="text-base sm:text-lg font-semibold text-white">Share &amp; Track</h3>
+            <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
               Instantly share your dynamic QR code or link, and watch your visitor analytics grow.
             </p>
           </div>
@@ -187,17 +196,17 @@ export default function HomePage() {
       </section>
 
       {/* Corporate Lead Capture / Contact Banner */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-28 md:mt-40 relative z-10">
-        <div className="glass-panel-premium rounded-2xl p-8 md:p-12 text-center space-y-6 relative overflow-hidden">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 sm:mt-28 md:mt-36 relative z-10">
+        <div className="glass-panel-premium rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-center space-y-5 sm:space-y-6 relative overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-primary/10 rounded-full blur-[80px] pointer-events-none"></div>
-          <h2 className="text-2xl md:text-4xl font-bold text-white tracking-tight">Have a custom project in mind?</h2>
-          <p className="text-gray-400 text-sm md:text-base max-w-lg mx-auto">
-            Let's work together to construct a digital product that elevates your company above the competition.
+          <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight">Have a custom project in mind?</h2>
+          <p className="text-gray-400 text-xs sm:text-sm md:text-base max-w-lg mx-auto leading-relaxed">
+            Let&apos;s work together to construct a digital product that elevates your company above the competition.
           </p>
           <div className="pt-2">
             <Link
               href="/contact"
-              className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary to-accent hover:opacity-95 text-white font-semibold px-6 py-3 rounded-lg text-sm transition-all"
+              className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary to-accent hover:opacity-95 text-white font-semibold px-6 py-3 rounded-lg text-sm transition-all shadow-md shadow-primary/20 cursor-pointer"
             >
               <span>Schedule a Call</span>
               <ArrowRight className="w-4 h-4" />
@@ -206,35 +215,35 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Product Highlight (Digital Visiting Card SaaS) - Moved to the very end of the page */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-28 md:mt-40 relative z-10 font-sans">
-        <div className="glass-panel-premium rounded-3xl p-8 md:p-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6 text-left">
+      {/* Product Highlight (Digital Visiting Card SaaS) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 sm:mt-28 md:mt-36 relative z-10 font-sans">
+        <div className="glass-panel-premium rounded-2xl sm:rounded-3xl p-6 sm:p-10 md:p-14 lg:p-16 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="space-y-5 sm:space-y-6 text-center lg:text-left">
             <span className="text-xs font-bold uppercase tracking-wider text-secondary">Our Flagship SaaS Product</span>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight">
-              A Professional Visiting Card. <br />
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight">
+              A Professional Visiting Card. <br className="hidden sm:inline" />
               <span className="text-secondary">Fully Digital. Always Free.</span>
             </h2>
-            <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+            <p className="text-gray-400 text-xs sm:text-sm md:text-base leading-relaxed">
               Ditch printing costs. Create a fast, beautiful, and mobile-optimized digital business card in under 5 minutes. Share instantly via custom link or dynamic QR code. Track page views and clicks live.
             </p>
-            <ul className="space-y-3">
+            <ul className="space-y-3 text-left max-w-md mx-auto lg:mx-0">
               {[
                 "Choose from 6 premium designer templates",
                 "Add click-to-contact links for WhatsApp, Email & Call",
                 "Integrate social handles and service catalogs",
                 "Live performance tracking & dynamic QR generation"
               ].map((item, idx) => (
-                <li key={idx} className="flex items-center text-sm text-gray-300">
+                <li key={idx} className="flex items-center text-xs sm:text-sm text-gray-300">
                   <CheckCircle className="w-4 h-4 mr-2.5 text-secondary shrink-0" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
-            <div className="pt-4">
+            <div className="pt-2 sm:pt-4 flex justify-center lg:justify-start">
               <Link
                 href="/digital-card"
-                className="inline-flex items-center space-x-2 bg-secondary text-background font-bold px-6.5 py-3.5 rounded-lg text-sm transition-transform hover:scale-[1.02] cursor-pointer"
+                className="inline-flex items-center space-x-2 bg-secondary text-background font-bold px-6 py-3.5 rounded-lg text-sm transition-transform hover:scale-[1.02] cursor-pointer shadow-lg shadow-secondary/15"
               >
                 <span>Digital Card Maker</span>
                 <ArrowRight className="w-4 h-4" />
@@ -243,14 +252,14 @@ export default function HomePage() {
           </div>
 
           {/* Graphical Representation / Mockup */}
-          <div className="relative flex justify-center items-center">
-            <div className="absolute w-72 h-72 bg-secondary/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="relative flex justify-center items-center mt-4 lg:mt-0">
+            <div className="absolute w-64 sm:w-72 h-64 sm:h-72 bg-secondary/10 rounded-full blur-3xl pointer-events-none"></div>
             {/* Simulated Phone Mockup */}
-            <div className="w-64 h-[440px] bg-slate-950 border-[6px] border-slate-800 rounded-[32px] overflow-hidden shadow-2xl relative">
+            <div className="w-60 sm:w-64 h-[420px] sm:h-[440px] bg-slate-950 border-[6px] border-slate-800 rounded-[32px] overflow-hidden shadow-2xl relative">
               <div className="w-20 h-4 bg-slate-800 absolute top-0 left-1/2 -translate-x-1/2 rounded-b-xl z-20"></div>
               {/* Card Template Mockup */}
               <div className="h-full bg-[#0a0f1d] p-4 flex flex-col items-center justify-between text-center relative pt-8">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-primary to-accent p-0.5 mt-2">
+                <div className="w-14 sm:w-16 h-14 sm:h-16 rounded-full bg-gradient-to-tr from-primary to-accent p-0.5 mt-2">
                   <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center text-white text-xs font-bold">
                     PHOTO
                   </div>
@@ -278,7 +287,7 @@ export default function HomePage() {
 
                 <div className="w-full space-y-1">
                   <div className="w-full h-1 bg-white/10 rounded-full"></div>
-                  <div className="w-full h-1 bg-white/10 rounded-full w-4/5 mx-auto"></div>
+                  <div className="w-4/5 mx-auto h-1 bg-white/10 rounded-full"></div>
                 </div>
                 
                 {/* Logo bottom */}

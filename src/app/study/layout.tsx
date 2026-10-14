@@ -2,6 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import StudyNavbar from "@/components/study/StudyNavbar";
 import StudyFooter from "@/components/study/StudyFooter";
+import AdBlockGuardWrapper from "@/components/study/AdBlockGuardWrapper";
 
 export const metadata: Metadata = {
   title: {
@@ -35,7 +36,14 @@ export default function StudyLayout({ children }: { children: React.ReactNode })
   return (
     <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-600 selection:text-white">
       <StudyNavbar />
-      <main className="flex-grow">{children}</main>
+      {/*
+        AdBlockGuardWrapper is scoped to <main> only.
+        StudyNavbar and StudyFooter remain interactive even when the overlay
+        is visible, so a visitor can navigate away if they choose to.
+      */}
+      <AdBlockGuardWrapper>
+        <main className="flex-grow">{children}</main>
+      </AdBlockGuardWrapper>
       <StudyFooter />
     </div>
   );

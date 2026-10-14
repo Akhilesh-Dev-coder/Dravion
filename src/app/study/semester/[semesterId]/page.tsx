@@ -73,11 +73,11 @@ export default async function SemesterDetailsPage({
             <ArrowLeft className="w-4 h-4" />
           </Link>
           <div>
-            <div className="flex items-center space-x-2">
-              <span className="text-xs font-bold font-mono px-2.5 py-0.5 rounded bg-blue-100 text-blue-700 border border-blue-200">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-xs font-bold font-mono px-2.5 py-0.5 rounded bg-blue-100 text-blue-700 border border-blue-200 shrink-0">
                 SEM {semester.number}
               </span>
-              <h1 className="text-3xl font-extrabold text-slate-900">{semester.name} Subjects</h1>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 break-words">{semester.name} Subjects</h1>
             </div>
             <p className="text-xs sm:text-sm text-slate-600 mt-1 font-medium">
               {semester.description || "Course modules and subject study materials."}

@@ -34,7 +34,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -49,7 +49,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Auth Actions */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-3 xl:space-x-4">
             {status === "loading" ? (
               <div className="w-8 h-8 rounded-full bg-white/5 animate-pulse" />
             ) : session ? (
@@ -88,10 +88,11 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-400 hover:text-white focus:outline-none p-1.5 cursor-pointer"
+              className="text-gray-400 hover:text-white focus:outline-none p-2 rounded-lg hover:bg-white/5 cursor-pointer transition-colors"
+              aria-label="Toggle navigation menu"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -101,7 +102,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {isOpen && (
-        <div className="md:hidden glass-panel border-x-0 border-b-0 animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="lg:hidden glass-panel border-x-0 border-b-0 animate-in fade-in slide-in-from-top-2 duration-200">
           <div className="px-2 pt-2 pb-4 space-y-1 sm:px-3">
             {navLinks.map((link) => (
               <Link

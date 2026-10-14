@@ -71,32 +71,32 @@ export default function ProductsPage() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-grid-pattern py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <div className="relative min-h-screen bg-grid-pattern py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background Orbs */}
-      <div className="absolute top-10 right-10 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-10 left-10 w-96 h-96 bg-secondary/5 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-10 right-0 md:right-10 w-72 sm:w-96 h-72 sm:h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-10 left-0 md:left-10 w-72 sm:w-96 h-72 sm:h-96 bg-secondary/5 rounded-full blur-[100px] pointer-events-none"></div>
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 sm:mb-16">
           <span className="text-xs font-bold uppercase tracking-wider text-secondary">Pricing & SaaS Plans</span>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-white mt-2 tracking-tight">Our Products</h1>
-          <p className="text-gray-400 mt-4 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white mt-2 tracking-tight">Our Products</h1>
+          <p className="text-gray-400 mt-3 sm:mt-4 text-xs sm:text-sm md:text-base max-w-xl mx-auto leading-relaxed">
             Create a fast, responsive digital card for free or upgrade to support team dashboards, custom URLs, and zero advertisement markings.
           </p>
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mb-16 sm:mb-20 items-stretch">
           {plans.map((plan, idx) => (
             <div
               key={idx}
-              className={`glass-panel-premium rounded-2xl p-8 flex flex-col justify-between border relative ${
+              className={`glass-panel-premium rounded-2xl p-6 sm:p-8 flex flex-col justify-between border relative ${
                 plan.popular ? "border-primary shadow-xl shadow-primary/5 ring-1 ring-primary/20" : "border-white/5"
               }`}
             >
               {plan.popular && (
-                <div className="absolute top-0 right-8 -translate-y-1/2 bg-primary text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">
+                <div className="absolute top-0 right-6 sm:right-8 -translate-y-1/2 bg-primary text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full shadow-md">
                   Popular
                 </div>
               )}

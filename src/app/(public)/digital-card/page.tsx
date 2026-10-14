@@ -38,26 +38,26 @@ export default function DigitalCardPage() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-grid-pattern py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <div className="relative min-h-screen bg-grid-pattern py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background Orbs */}
-      <div className="absolute top-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute top-20 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-10 w-72 sm:w-96 h-72 sm:h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-20 right-0 md:right-10 w-72 sm:w-96 h-72 sm:h-96 bg-accent/5 rounded-full blur-[100px] pointer-events-none"></div>
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Hero Area */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <span className="text-xs font-bold uppercase tracking-wider text-primary">SaaS Solution</span>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-white mt-2 mb-6 tracking-tight leading-tight">
-            Elevate Your Networking. <br />
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mt-2 mb-4 sm:mb-6 tracking-tight leading-tight text-balance">
+            Elevate Your Networking. <br className="hidden md:inline" />
             <span className="text-gradient-primary">Go 100% Digital.</span>
           </h1>
-          <p className="text-gray-400 text-sm md:text-base leading-relaxed">
-            Standard business cards get thrown away. A Dravion Digital Visiting Card is always accessible in your customer's browser, links directly to your WhatsApp and socials, and logs analytic scans automatically.
+          <p className="text-gray-400 text-xs sm:text-sm md:text-base leading-relaxed px-2">
+            Standard business cards get thrown away. A Dravion Digital Visiting Card is always accessible in your customer&apos;s browser, links directly to your WhatsApp and socials, and logs analytic scans automatically.
           </p>
-          <div className="mt-8">
+          <div className="mt-6 sm:mt-8">
             <Link
               href="/register"
-              className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary to-accent hover:opacity-95 text-white font-bold px-8 py-3 rounded-lg text-sm transition-all shadow-lg shadow-primary/20 cursor-pointer"
+              className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary to-accent hover:opacity-95 text-white font-bold px-6 sm:px-8 py-3 rounded-lg text-sm transition-all shadow-lg shadow-primary/20 cursor-pointer"
             >
               <span>Build Your Free Card</span>
               <ArrowRight className="w-4 h-4" />
@@ -66,7 +66,7 @@ export default function DigitalCardPage() {
         </div>
 
         {/* Builder walkthrough steps */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-16 sm:mb-24">
           {steps.map((step, idx) => (
             <div key={idx} className="glass-panel p-6 rounded-2xl border border-white/5 space-y-4">
               <div className="w-10 h-10 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center">
@@ -79,9 +79,9 @@ export default function DigitalCardPage() {
         </div>
 
         {/* Benefits Comparison Grid */}
-        <div className="glass-panel-premium rounded-3xl p-8 md:p-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+        <div className="glass-panel-premium rounded-2xl sm:rounded-3xl p-6 sm:p-10 md:p-16 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-16">
           <div className="relative flex justify-center">
-            <div className="w-72 h-[380px] bg-[#0b0f19] border border-white/10 rounded-2xl p-6 relative flex flex-col justify-between shadow-2xl">
+            <div className="w-64 sm:w-72 max-w-full h-[360px] sm:h-[380px] bg-[#0b0f19] border border-white/10 rounded-2xl p-6 relative flex flex-col justify-between shadow-2xl">
               <div className="flex justify-between items-start">
                 <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary text-xs font-bold">
                   D

@@ -65,8 +65,8 @@ export default function StudyNavbar() {
             </Link>
           </div>
 
-          {/* Quick Search bar on Desktop */}
-          <form onSubmit={handleSearchSubmit} className="hidden md:flex flex-1 max-w-md mx-4">
+          {/* Quick Search bar on Desktop & Tablet */}
+          <form onSubmit={handleSearchSubmit} className="hidden md:flex flex-1 max-w-xs lg:max-w-md mx-2 lg:mx-4">
             <div className="relative w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input

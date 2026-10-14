@@ -10,6 +10,22 @@ import SubjectViewClient from "./SubjectViewClient";
 
 export const revalidate = 60;
 
+/**
+ * serialise — strips Mongoose-specific ObjectId / Date wrappers.
+ *
+ * Mongoose `.lean()` returns plain JS objects, but the `_id` fields are still
+ * BSON ObjectId instances with a custom `toJSON` method. React Server Components
+ * cannot serialise those across the RSC boundary, producing the warning:
+ *   "Only plain objects can be passed to Client Components from Server Components."
+ *
+ * Passing every value through JSON.parse(JSON.stringify(...)) converts all
+ * ObjectIds to their 24-character hex string representations and removes any
+ * non-serialisable prototype methods, giving us safe plain objects.
+ */
+function serialise<T>(value: T): T {
+  return JSON.parse(JSON.stringify(value));
+}
+
 export default async function SubjectDetailsPage({
   params,
   searchParams,
@@ -72,14 +88,17 @@ export default async function SubjectDetailsPage({
     if (found) initialModule = found;
   }
 
+  // Serialise all Mongoose lean objects before crossing the RSC boundary.
+  // This eliminates the "Only plain objects can be passed to Client Components"
+  // warning by converting ObjectIds and Dates to plain JSON-safe values.
   return (
     <SubjectViewClient
-      semester={semester}
-      subject={subject}
-      modules={modulesList}
-      initialModule={initialModule}
-      pyqPapers={pyqPapers}
-      importantQuestions={importantQuestions}
+      semester={serialise(semester)}
+      subject={serialise(subject)}
+      modules={serialise(modulesList)}
+      initialModule={serialise(initialModule)}
+      pyqPapers={serialise(pyqPapers)}
+      importantQuestions={serialise(importantQuestions)}
     />
   );
 }
